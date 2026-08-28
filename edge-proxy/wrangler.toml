@@ -1,0 +1,10 @@
+name = "artcrew-edge-proxy"
+main = "src/index.ts"
+compatibility_date = "2026-08-28"
+
+[vars]
+SUPABASE_URL = "https://pwactghtuytnewrojxxf.supabase.co"
+RESEND_API_URL = "https://api.resend.com"
+LINE_API_URL = "https://api.line.me"
+LINE_NOTIFY_API_URL = "https://notify-api.line.me"
+ALLOWED_ORIGINS = "https://artcrewarmada.pages.dev,http://localhost:5173,http://localhost:3000"
