@@ -2,6 +2,10 @@
 .env
 /node_modules/
 
-# React Router
+# React Router build files
 /.react-router/
 /build/
+
+# Cloudflare Wrangler files
+.wrangler/
+.dev.vars
