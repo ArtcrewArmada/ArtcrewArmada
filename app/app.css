@@ -1,5 +1,37 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Matrice";
+  src: url("/fonts/matrice/Matrice ExtraLight.otf") format("opentype");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Matrice";
+  src: url("/fonts/matrice/Matrice Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Matrice";
+  src: url("/fonts/matrice/Matrice SemiBold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Matrice";
+  src: url("/fonts/matrice/Matrice ExtraBold.otf") format("opentype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   --color-armada-navy: #1E2A44;
   --color-armada-sand: #C7A995;
@@ -8,8 +40,9 @@
   --color-armada-sage: #8EA08F;
   --color-armada-terracotta: #D17C5C;
 
+  --font-matrice: "Matrice", sans-serif;
   --font-headline: "Cormorant Garamond", serif;
-  --font-sans: "Montserrat", "Noto Sans Thai", sans-serif;
+  --font-sans: "Matrice", "Montserrat", "Noto Sans Thai", sans-serif;
   --font-serif: "Noto Serif Thai", serif;
 }
 
