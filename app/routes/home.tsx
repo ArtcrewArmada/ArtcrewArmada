@@ -27,12 +27,16 @@ export default function Home() {
               {t.home.heroSubtitle}
             </p>
             <div className="pt-4 flex flex-wrap gap-4">
-              <Button as={Link} to={`/${lang}/craft`} variant="navy">
-                {t.home.exploreBtn}
-              </Button>
-              <Button as={Link} to={`/${lang}/shop`} variant="secondary">
-                {t.home.shopBtn}
-              </Button>
+              <Link to={`/${lang}/craft`} className="inline-block">
+                <Button variant="navy" type="button">
+                  {t.home.exploreBtn}
+                </Button>
+              </Link>
+              <Link to={`/${lang}/shop`} className="inline-block">
+                <Button variant="secondary" type="button">
+                  {t.home.shopBtn}
+                </Button>
+              </Link>
             </div>
           </div>
 

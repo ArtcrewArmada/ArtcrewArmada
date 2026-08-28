@@ -8,3 +8,4 @@ compatibility_flags = [ "nodejs_compat" ]
 CF_R2_BUCKET_NAME = "media-armada"
 CF_R2_PUBLIC_URL = "https://pub-fbe4c0b88b1c4967a575e56eb5f39ecf.r2.dev"
 SUPABASE_URL = "https://pwactghtuytnewrojxxf.supabase.co"
+EDGE_PROXY_URL = "https://artcrew-edge-proxy.timelessvalues01.workers.dev"

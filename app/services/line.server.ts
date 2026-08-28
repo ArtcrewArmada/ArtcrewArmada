@@ -7,24 +7,39 @@ export interface SendLineNotificationParams {
 /**
  * Send a notification to LINE.
  * Supports both LINE Messaging API (Push Message) and LINE Notify (Token-based).
+ * Routes through the Edge Proxy if EDGE_PROXY_URL is configured.
  */
-export async function sendLineNotification({
-  message,
-  to,
-  notifyToken,
-}: SendLineNotificationParams) {
-  const channelAccessToken = process.env.LINE_CHANNEL_ACCESS_TOKEN || "";
-  const defaultNotifyToken = process.env.LINE_NOTIFY_TOKEN || "";
+export async function sendLineNotification(
+  { message, to, notifyToken }: SendLineNotificationParams,
+  env?: any
+) {
+  const edgeProxyUrl = env?.EDGE_PROXY_URL || process?.env?.EDGE_PROXY_URL || "";
+  
+  const messagingUrl = edgeProxyUrl 
+    ? `${edgeProxyUrl}/line-messaging/v2/bot/message/push` 
+    : "https://api.line.me/v2/bot/message/push";
+    
+  const notifyUrl = edgeProxyUrl 
+    ? `${edgeProxyUrl}/line-notify/api/notify` 
+    : "https://notify-api.line.me/api/notify";
+
+  const channelAccessToken = env?.LINE_CHANNEL_ACCESS_TOKEN || process?.env?.LINE_CHANNEL_ACCESS_TOKEN || "";
+  const defaultNotifyToken = env?.LINE_NOTIFY_TOKEN || process?.env?.LINE_NOTIFY_TOKEN || "";
 
   // 1. Attempt LINE Messaging API (Push Message) if lineUserId and channelAccessToken are available
-  if (to && channelAccessToken) {
+  if (to && (channelAccessToken || edgeProxyUrl)) {
     try {
-      const response = await fetch("https://api.line.me/v2/bot/message/push", {
+      const headers: Record<string, string> = {
+        "Content-Type": "application/json",
+      };
+      
+      if (channelAccessToken) {
+        headers["Authorization"] = `Bearer ${channelAccessToken}`;
+      }
+
+      const response = await fetch(messagingUrl, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${channelAccessToken}`,
-        },
+        headers,
         body: JSON.stringify({
           to,
           messages: [
@@ -49,14 +64,19 @@ export async function sendLineNotification({
 
   // 2. Attempt LINE Notify as a fallback or default notification channel
   const activeToken = notifyToken || defaultNotifyToken;
-  if (activeToken) {
+  if (activeToken || edgeProxyUrl) {
     try {
-      const response = await fetch("https://notify-api.line.me/api/notify", {
+      const headers: Record<string, string> = {
+        "Content-Type": "application/x-www-form-urlencoded",
+      };
+      
+      if (activeToken) {
+        headers["Authorization"] = `Bearer ${activeToken}`;
+      }
+
+      const response = await fetch(notifyUrl, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-          Authorization: `Bearer ${activeToken}`,
-        },
+        headers,
         body: new URLSearchParams({ message }),
       });
 
@@ -76,3 +96,4 @@ export async function sendLineNotification({
   console.log(`[LINE NOTIFICATION MOCK] Message: ${message}`);
   return { success: false, method: "mock" };
 }
+
