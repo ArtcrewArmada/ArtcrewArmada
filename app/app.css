@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+@theme {
+  --color-armada-navy: #1E2A44;
+  --color-armada-sand: #C7A995;
+  --color-armada-ivory: #F7F4EF;
+  --color-armada-seablue: #557A8B;
+  --color-armada-sage: #8EA08F;
+  --color-armada-terracotta: #D17C5C;
+
+  --font-headline: "Cormorant Garamond", serif;
+  --font-sans: "Montserrat", "Noto Sans Thai", sans-serif;
+  --font-serif: "Noto Serif Thai", serif;
+}
+
+html,
+body {
+  background-color: var(--color-armada-ivory);
+  color: var(--color-armada-navy);
+  font-family: var(--font-sans);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+}
+
+/* Custom Editorial scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-armada-ivory);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-armada-sand);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-armada-navy);
+}
+
+/* Base styles for Typography */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-armada-navy);
+}
+
+/* Transition utility classes */
+.transition-calm {
+  transition: all 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Editorial Fine Line Divider */
+.border-fine {
+  border-color: rgba(30, 42, 68, 0.08);
+}
