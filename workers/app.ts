@@ -1,13 +1,12 @@
 import { createRequestHandler } from "react-router";
 
-const requestHandler = createRequestHandler(
-  // @ts-expect-error - Virtual module that gets resolved by Vite during build
-  () => import("virtual:react-router/server-build"),
-  import.meta.env.MODE
-);
+// @ts-ignore - Import the compiled server build metadata directly to avoid Vite virtual-module resolution errors in Wrangler
+import * as build from "../build/server/index.js";
+
+const handler = createRequestHandler(build);
 
 export default {
   async fetch(request, env, ctx) {
-    return requestHandler(request, { env, ctx });
+    return handler(request, { env, ctx });
   },
 };
