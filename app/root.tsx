@@ -7,11 +7,19 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from "react-router";
-import type { LoaderFunctionArgs } from "react-router";
+import type { LoaderFunctionArgs, MetaFunction } from "react-router";
 import { getLanguageFromRequest } from "~/locales/helpers";
 import "./app.css";
 
+export const meta: MetaFunction = () => {
+  return [
+    { title: "ARTcrew ARMADA - Creation & Craft House" },
+    { name: "description", content: "Values from Craft, Connecting People to Sustainable Innovation." },
+  ];
+};
+
 export const links = () => [
+  { rel: "icon", type: "image/jpeg", href: "https://pub-fbe4c0b88b1c4967a575e56eb5f39ecf.r2.dev/logo.jpg" },
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
   {
     rel: "preconnect",
