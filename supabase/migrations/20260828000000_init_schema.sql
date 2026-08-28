@@ -1,16 +1,30 @@
 -- 1. Enable UUID Extension
 create extension if not exists "uuid-ossp";
 
--- 2. Define Enum Types
-create type user_role as enum (
-  'super_admin', 'admin', 'editor', 'creator', 
-  'artist', 'artisan', 'partner', 'instructor', 
-  'member', 'customer', 'visitor'
-);
+-- 2. Define Enum Types safely if they do not exist
+do $$
+begin
+  if not exists (select 1 from pg_type where typname = 'user_role') then
+    create type user_role as enum (
+      'super_admin', 'admin', 'editor', 'creator', 
+      'artist', 'artisan', 'partner', 'instructor', 
+      'member', 'customer', 'visitor'
+    );
+  end if;
 
-create type content_status as enum ('draft', 'review', 'published', 'archived');
-create type registration_status as enum ('pending', 'confirmed', 'cancelled');
-create type payment_status as enum ('unpaid', 'paid', 'refunded');
+  if not exists (select 1 from pg_type where typname = 'content_status') then
+    create type content_status as enum ('draft', 'review', 'published', 'archived');
+  end if;
+
+  if not exists (select 1 from pg_type where typname = 'registration_status') then
+    create type registration_status as enum ('pending', 'confirmed', 'cancelled');
+  end if;
+
+  if not exists (select 1 from pg_type where typname = 'payment_status') then
+    create type payment_status as enum ('unpaid', 'paid', 'refunded');
+  end if;
+end
+$$;
 
 -- 3. Profiles Table (Link with Supabase Auth)
 create table public.profiles (
