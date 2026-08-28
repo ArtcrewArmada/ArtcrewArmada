@@ -9,6 +9,7 @@
     "typecheck": "react-router typegen && tsc"
   },
   "dependencies": {
+    "@cloudflare/workers-types": "^5.20260828.1",
     "@react-router/cloudflare": "^8.3.0",
     "@react-router/node": "^8",
     "@react-router/serve": "^8",
