@@ -32,10 +32,12 @@ export default function Upcycling() {
             เราเปลี่ยนวัสดุอย่างพลาสติกใช้แล้ว เศษหนังโรงงาน เศษด้ายเหลือทิ้ง และโลหะเก่า ให้เป็นวัสดุหลักในการดีไซน์คอลเลกชันกระเป๋า เฟอร์นิเจอร์ และงานศิลปะประดับบ้าน โดยรักษาอัตลักษณ์ของเนื้อวัสดุเดิมและผสมผสานการออกแบบสไตล์ Editorial
           </p>
         </div>
-        <div className="border border-armada-navy/10 bg-armada-navy/5 flex items-center justify-center p-8 min-h-[300px]">
-          <span className="font-headline text-2xl font-light italic text-armada-navy/30">
-            ARMADA Material Lab Image
-          </span>
+        <div className="border border-armada-navy/10 bg-white flex items-center justify-center p-8 min-h-[300px]">
+          <img
+            src="https://pub-fbe4c0b88b1c4967a575e56eb5f39ecf.r2.dev/armada-atelier.jpg"
+            alt="ARMADA L'ATELIER Trademark Logo"
+            className="w-64 h-64 object-contain"
+          />
         </div>
       </div>
     </div>
