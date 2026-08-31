@@ -19,7 +19,7 @@ export const meta: MetaFunction = () => {
 };
 
 export const links = () => [
-  { rel: "icon", type: "image/jpeg", href: "https://pub-fbe4c0b88b1c4967a575e56eb5f39ecf.r2.dev/logo.jpg" },
+  { rel: "icon", type: "image/jpeg", href: "/logo-atelier.jpg" },
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
   {
     rel: "preconnect",

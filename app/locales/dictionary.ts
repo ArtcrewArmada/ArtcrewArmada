@@ -8,7 +8,7 @@ export const dictionary = {
     nav: {
       about: "เกี่ยวกับเรา",
       craft: "งานฝีมือและการสร้างสรรค์",
-      upcycling: "ARMADA อัปไซคลิง",
+      upcycling: "Armada Upcycling",
       primitive: "ศิลปะพื้นถิ่น",
       shop: "ร้านค้า",
       learning: "การเรียนรู้และกิจกรรม",
@@ -100,7 +100,7 @@ export const dictionary = {
     nav: {
       about: "About Us",
       craft: "Creation & Craft",
-      upcycling: "ARMADA Upcycling",
+      upcycling: "Armada Upcycling",
       primitive: "Art & Primitive",
       shop: "Shop",
       learning: "Learning & Activities",
@@ -192,7 +192,7 @@ export const dictionary = {
     nav: {
       about: "À Propos",
       craft: "Création & Artisanat",
-      upcycling: "ARMADA Upcycling",
+      upcycling: "Armada Upcycling",
       primitive: "Art & Primitif",
       shop: "Boutique",
       learning: "Apprentissage & Activités",

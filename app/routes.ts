@@ -20,6 +20,14 @@ export default [
   // 3. SaaS Portal Area
   route("app", "routes/app.tsx", [
     route("dashboard", "routes/app.dashboard.tsx"),
+    route("courses", "routes/app.courses.tsx"),
+    route("learning", "routes/app.learning.tsx"),
+    route("events", "routes/app.events.tsx"),
+    route("community", "routes/app.community.tsx"),
+    route("projects", "routes/app.projects.tsx"),
+    route("messages", "routes/app.messages.tsx"),
+    route("resources", "routes/app.resources.tsx"),
+    route("settings", "routes/app.settings.tsx"),
   ]),
 
   // 4. Admin CMS Area

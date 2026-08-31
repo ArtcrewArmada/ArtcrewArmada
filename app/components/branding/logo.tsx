@@ -6,7 +6,7 @@ interface LogoProps extends React.ImgHTMLAttributes<HTMLImageElement> {
 }
 
 export function Logo({ variant = "full", theme = "dark", className = "", ...props }: LogoProps) {
-  const logoUrl = "https://pub-fbe4c0b88b1c4967a575e56eb5f39ecf.r2.dev/logo.jpg";
+  const logoUrl = "/logo-atelier.jpg";
   
   const textColors = {
     dark: {

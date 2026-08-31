@@ -26,7 +26,7 @@ export default function Upcycling() {
             Upcycling Philosophy
           </span>
           <h2 className="font-headline text-3xl font-light text-armada-navy">
-            "From Waste to Worth"
+            "Reuse. Return. Recreate. Revive."
           </h2>
           <p className="font-sans text-xs text-armada-navy/70 leading-relaxed">
             เราเปลี่ยนวัสดุอย่างพลาสติกใช้แล้ว เศษหนังโรงงาน เศษด้ายเหลือทิ้ง และโลหะเก่า ให้เป็นวัสดุหลักในการดีไซน์คอลเลกชันกระเป๋า เฟอร์นิเจอร์ และงานศิลปะประดับบ้าน โดยรักษาอัตลักษณ์ของเนื้อวัสดุเดิมและผสมผสานการออกแบบสไตล์ Editorial

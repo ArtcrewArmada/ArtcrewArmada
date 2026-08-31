@@ -58,7 +58,7 @@ export default function AppLayout() {
                 Artisan Member
               </span>
               <span className="font-sans text-[8px] text-armada-ivory/40 uppercase">
-                member@gmail.com
+                armada.th2025@gmail.com
               </span>
             </div>
           </div>
