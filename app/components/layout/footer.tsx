@@ -19,8 +19,30 @@ export function Footer() {
           <p className="font-serif text-sm text-armada-ivory/60 max-w-sm leading-relaxed italic">
             "From Craft to Creation, From People to Possibility."
           </p>
-          <div className="pt-2">
-            <Logo variant="symbol" theme="light" className="w-12 h-12 stroke-armada-sand/40" />
+          <div className="flex items-center space-x-6 pt-2">
+            <div className="flex items-center space-x-2">
+              <img 
+                src="/logo-artcrew.jpg" 
+                alt="ARTcrew ARMADA" 
+                className="w-12 h-12 rounded-full object-cover border border-armada-sand/20 hover:scale-105 transition-transform duration-300" 
+              />
+              <div className="flex flex-col">
+                <span className="font-sans text-[9px] font-bold text-armada-sand uppercase tracking-wider">ARTcrew ARMADA</span>
+                <span className="font-sans text-[7px] text-armada-ivory/40 uppercase">Parent Brand</span>
+              </div>
+            </div>
+            <div className="h-8 w-px bg-armada-sand/20" />
+            <div className="flex items-center space-x-2">
+              <img 
+                src="/logo-atelier.jpg" 
+                alt="ARMADA L'ATELIER" 
+                className="w-12 h-12 rounded-full object-cover border border-armada-sand/20 hover:scale-105 transition-transform duration-300" 
+              />
+              <div className="flex flex-col">
+                <span className="font-sans text-[9px] font-bold text-armada-sand uppercase tracking-wider">ARMADA L'ATELIER</span>
+                <span className="font-sans text-[7px] text-armada-ivory/40 uppercase">Upcycling Studio</span>
+              </div>
+            </div>
           </div>
         </div>
 
