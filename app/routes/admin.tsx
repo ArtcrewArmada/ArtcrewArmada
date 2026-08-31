@@ -105,7 +105,7 @@ export default function AdminDashboard() {
   // Media Library Images List
   const [mediaList, setMediaList] = useState([
     { name: "armada-atelier.jpg", size: "128 KB", url: "https://pub-fbe4c0b88b1c4967a575e56eb5f39ecf.r2.dev/armada-atelier.jpg" },
-    { name: "logo.jpg", size: "54 KB", url: "https://pub-fbe4c0b88b1c4967a575e56eb5f39ecf.r2.dev/logo.jpg" },
+    { name: "logo-artcrew.jpg", size: "227 KB", url: "/logo-artcrew.jpg" },
     { name: "logo-atelier.jpg", size: "275 KB", url: "/logo-atelier.jpg" }
   ]);
   const [mediaUploadUrl, setMediaUploadUrl] = useState("");
@@ -155,7 +155,7 @@ export default function AdminDashboard() {
     setFormType("Story");
     setFormStatus("Draft");
     setFormLang("TH / EN");
-    setFormImage("/logo-atelier.jpg");
+    setFormImage("/logo-artcrew.jpg");
     
     setFormMetaTitle("");
     setFormMetaDesc("");
