@@ -14,6 +14,7 @@ export default [
     route("shop", "routes/shop.tsx"),
     route("learning", "routes/learning.tsx"),
     route("journal", "routes/journal.tsx"),
+    route("awareness", "routes/awareness.tsx"),
     route("contact", "routes/contact.tsx"),
   ]),
 

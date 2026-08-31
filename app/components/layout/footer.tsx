@@ -51,18 +51,33 @@ export function Footer() {
           <h4 className="font-sans text-[10px] font-bold tracking-widest uppercase text-armada-sand">
             Ecosystem
           </h4>
-          <div className="flex flex-col space-y-2">
-            <Link to={`/${currentLang}/about`} className="font-sans text-xs text-armada-ivory/60 hover:text-armada-sand transition-calm">
+          <div className="grid grid-cols-2 gap-x-4 gap-y-2">
+            <Link to={`/${currentLang}/about`} className="font-sans text-[11px] text-armada-ivory/60 hover:text-armada-sand transition-calm">
               {t.nav.about}
             </Link>
-            <Link to={`/${currentLang}/craft`} className="font-sans text-xs text-armada-ivory/60 hover:text-armada-sand transition-calm">
+            <Link to={`/${currentLang}/craft`} className="font-sans text-[11px] text-armada-ivory/60 hover:text-armada-sand transition-calm">
               {t.nav.craft}
             </Link>
-            <Link to={`/${currentLang}/upcycling`} className="font-sans text-xs text-armada-ivory/60 hover:text-armada-sand transition-calm">
+            <Link to={`/${currentLang}/upcycling`} className="font-sans text-[11px] text-armada-ivory/60 hover:text-armada-sand transition-calm">
               {t.nav.upcycling}
             </Link>
-            <Link to={`/${currentLang}/primitive`} className="font-sans text-xs text-armada-ivory/60 hover:text-armada-sand transition-calm">
+            <Link to={`/${currentLang}/primitive`} className="font-sans text-[11px] text-armada-ivory/60 hover:text-armada-sand transition-calm">
               {t.nav.primitive}
+            </Link>
+            <Link to={`/${currentLang}/shop`} className="font-sans text-[11px] text-armada-ivory/60 hover:text-armada-sand transition-calm">
+              {t.nav.shop}
+            </Link>
+            <Link to={`/${currentLang}/learning`} className="font-sans text-[11px] text-armada-ivory/60 hover:text-armada-sand transition-calm">
+              {t.nav.learning}
+            </Link>
+            <Link to={`/${currentLang}/journal`} className="font-sans text-[11px] text-armada-ivory/60 hover:text-armada-sand transition-calm">
+              {t.nav.journal}
+            </Link>
+            <Link to={`/${currentLang}/awareness`} className="font-sans text-[11px] text-armada-ivory/60 hover:text-armada-sand transition-calm">
+              {t.nav.awareness}
+            </Link>
+            <Link to={`/${currentLang}/contact`} className="font-sans text-[11px] text-armada-ivory/60 hover:text-armada-sand transition-calm col-span-2">
+              {t.nav.contact}
             </Link>
           </div>
         </div>
