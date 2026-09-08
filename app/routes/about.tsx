@@ -95,7 +95,11 @@ export default function About() {
               </div>
               
               <div className="flex justify-center py-6">
-                <Logo variant="emblem" theme="dark" className="w-36 h-36 opacity-90 transition-transform duration-500 group-hover:scale-105" />
+                <img 
+                  src="https://pub-fbe4c0b88b1c4967a575e56eb5f39ecf.r2.dev/founder.jpg" 
+                  alt={about.founderName || "Wipawadee Lopez"}
+                  className="w-48 h-48 rounded-full object-cover border-2 border-[#B08A3E]/30 opacity-90 transition-transform duration-500 group-hover:scale-105"
+                />
               </div>
 
               <div className="border-t border-[#F5F2EA]/5 pt-4 space-y-2 text-[10px] font-sans text-[#AFAFA9]">
