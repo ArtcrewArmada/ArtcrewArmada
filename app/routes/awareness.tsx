@@ -122,40 +122,6 @@ export default function AwarenessCenter() {
           </div>
         </div>
 
-        {/* Community Impact Section */}
-        <div className="border-t border-[#F5F2EA]/10 py-20 space-y-16">
-          <div className="max-w-4xl mx-auto text-center space-y-8">
-            <span className="font-sans text-[10px] font-bold tracking-[0.3em] text-[#B08A3E] uppercase">
-              Skill Sharing • Livelihood Creation • Sustainable Community Development
-            </span>
-            <h2 className="font-serif-display text-5xl md:text-6xl text-[#F5F2EA]">Community Impact</h2>
-            <div className="space-y-4">
-              <h3 className="font-sans text-xl text-[#F5F2EA] font-bold">ถ่ายทอดองค์ความรู้ด้านงานหัตถกรรมสู่ชุมชน</h3>
-              <p className="font-sans text-sm md:text-base text-[#F5F2EA]/80 leading-relaxed text-justify md:text-center indent-8 md:indent-0">
-                การทำงานด้านงานหัตถกรรมของ Artcrew Armada และ Armada มุ่งเน้นการถ่ายทอดองค์ความรู้และทักษะด้านงานหัตถกรรมสู่ชุมชน ผ่านการจัดกิจกรรมฝึกอบรมและเวิร์กชอปในหลายพื้นที่ มุ่งเน้นให้ผู้เรียนสามารถลงมือปฏิบัติได้จริง เพื่อพัฒนาทักษะและต่อยอดเป็นรายได้อย่างยั่งยืน ให้แก่กลุ่มชุมชน กลุ่มสตรีแม่บ้าน เยาวชน และผู้สนใจงานหัตถกรรม
-              </p>
-            </div>
-          </div>
-
-          {/* Learning & Activity Gallery Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {[
-              "LEARNING1.jpg", "LEARNING2.jpg", "LEARNING3.jpg",
-              "LEARNING4.jpg", "LEARNING5.png", "LEARNING6.png",
-              "LEARNING7.png", "LEARNING8.png", "LEARNING9.png"
-            ].map((img, idx) => (
-              <div key={idx} className="aspect-square overflow-hidden bg-[#131313] border border-[#F5F2EA]/5 group">
-                <img 
-                  src={`${R2_BASE}/Learning %26 Activity/${img}`} 
-                  alt={`Learning Activity ${idx + 1}`}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-90 group-hover:opacity-100"
-                  loading="lazy"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-
         {/* Call To Action */}
         <div className="bg-[#1A1A1A] border border-[#B08A3E]/20 text-[#F5F2EA] p-12 text-center space-y-6">
           <span className="font-sans text-[10px] font-bold tracking-widest uppercase text-[#B08A3E]">
