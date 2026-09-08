@@ -89,17 +89,23 @@ export function Footer() {
         {/* Contact Info */}
         <div className="space-y-4">
           <h4 className="font-sans text-[10px] font-bold tracking-widest uppercase text-[#B08A3E]">
-            Awareness Center
+            ARTCREW ARMADA
           </h4>
           <div className="flex flex-col space-y-2 font-sans text-xs text-[#AFAFA9] leading-relaxed">
-            <p>ARTcrew ARMADA House</p>
-            <p>Bangkok, Thailand</p>
+            <p>Art & Craft / Creation / Culture / Sustainability</p>
+            <p className="pt-2">วิภาวดี โลเปซ</p>
             <a
-              href="mailto:info@artcrewarmada.com"
+              href="mailto:armada.th2025@gmail.com"
               className="hover:text-[#B08A3E] transition-calm"
             >
-              info@artcrewarmada.com
+              armada.th2025@gmail.com
             </a>
+            <p>+66 84 878 6297</p>
+            <div className="flex items-center gap-2 pt-1 text-[10px]">
+              <span>FB: ArtcrewArmada</span>
+              <span className="text-[#F5F2EA]/20">|</span>
+              <span>IG: armada.th</span>
+            </div>
           </div>
 
           {/* Language Switcher in footer */}

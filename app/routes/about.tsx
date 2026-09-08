@@ -107,6 +107,7 @@ export default function About() {
             {/* Quick Contact Box */}
             <div className="border border-[#F5F2EA]/5 p-6 bg-[#1A1A1A]/50 text-[10px] font-sans text-[#AFAFA9] space-y-2">
               <span className="font-bold uppercase tracking-widest text-[#B08A3E] block mb-1">Contact Details</span>
+              <p>วิภาวดี โลเปซ (Wipawadee Lopez)</p>
               <p>Email: armada.th2025@gmail.com</p>
               <p>Tel: +66 84 878 6297</p>
               <p>Facebook: ArtcrewArmada</p>

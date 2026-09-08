@@ -23,17 +23,29 @@ export default function Contact() {
       <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
         {/* Info card */}
         <div className="md:col-span-5 bg-[#1A1A1A] border border-[#F5F2EA]/10 p-8 space-y-6">
-          <h3 className="font-serif-display text-2xl text-[#F5F2EA]">ARTcrew ARMADA Office</h3>
-          <div className="space-y-4 font-sans text-xs text-[#AFAFA9] leading-relaxed">
+          <h3 className="font-serif-display text-2xl text-[#F5F2EA]">ARTCREW ARMADA</h3>
+          <p className="font-sans text-[10px] font-bold tracking-widest text-[#B08A3E] uppercase">
+            Art & Craft / Creation / Culture / Sustainability
+          </p>
+          <div className="space-y-4 font-sans text-xs text-[#AFAFA9] leading-relaxed pt-4">
             <p>
-              <strong>Address:</strong><br />
-              ARTcrew ARMADA Creative House,<br />
-              Bangkok, Thailand
+              <strong>Contact:</strong><br />
+              วิภาวดี โลเปซ (Wipawadee Lopez)
             </p>
             <p>
               <strong>Email:</strong><br />
-              info@artcrewarmada.com
+              armada.th2025@gmail.com
             </p>
+            <p>
+              <strong>Tel:</strong><br />
+              +66848786297
+            </p>
+            <div className="pt-2">
+              <p>
+                <strong>Facebook:</strong> ArtcrewArmada<br />
+                <strong>IG:</strong> armada.th
+              </p>
+            </div>
           </div>
         </div>
 
