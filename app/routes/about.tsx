@@ -32,6 +32,40 @@ export default function About() {
         </div>
       </div>
 
+      {/* Brand Story (Art, Craft & Conscious Creation) */}
+      {about.story && (
+        <div className="max-w-4xl mx-auto px-6 py-16 md:py-24 space-y-20 border-b border-[#F5F2EA]/5">
+          <div className="space-y-8">
+            <h2 className="font-serif-display font-light text-3xl md:text-5xl text-[#F5F2EA] text-center">
+              {about.story.title}
+            </h2>
+            <div className="space-y-6 text-[#AFAFA9] font-sans text-xs md:text-sm leading-relaxed md:text-justify text-left">
+              <p className="font-bold text-[#F5F2EA] text-center mb-8">{about.story.intro}</p>
+              <p>{about.story.p1}</p>
+              <p>{about.story.p2}</p>
+              <p className="italic text-center py-4">{about.story.p3}</p>
+              <p>{about.story.p4}</p>
+            </div>
+          </div>
+
+          <div className="space-y-8">
+            <h3 className="font-serif-display font-light text-2xl md:text-4xl text-[#B08A3E] text-center italic">
+              {about.story.subtitle}
+            </h3>
+            <div className="space-y-6 text-[#AFAFA9] font-sans text-xs md:text-sm leading-relaxed md:text-justify text-left">
+              <p>{about.story.p5}</p>
+              <p>{about.story.p6}</p>
+              <p>{about.story.p7}</p>
+              <div className="pt-8">
+                <p className="font-serif-display text-lg md:text-2xl text-[#F5F2EA] text-center italic tracking-wide">
+                  "{about.story.tagline}"
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* 2. Founder Profile & Story */}
       <div className="max-w-7xl mx-auto px-6 py-16 border-b border-[#F5F2EA]/5">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
