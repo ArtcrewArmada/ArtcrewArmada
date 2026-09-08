@@ -2,166 +2,140 @@ import { useParams } from "react-router";
 import { getTranslation } from "~/locales/dictionary";
 import { PageHero } from "~/components/ui/page-hero";
 
+const R2_BASE = "https://pub-fbe4c0b88b1c4967a575e56eb5f39ecf.r2.dev";
+
 export default function AwarenessCenter() {
   const params = useParams();
   const lang = params.lang || "th";
   const t = getTranslation(lang);
   const s = (t.home as any).sections?.awareness || {};
 
-  const localizedContent = {
-    th: {
-      subtitle: "วิสัยทัศน์และการตระหนักรู้งานศิลปหัตถกรรม",
-      description: "พื้นที่สร้างแรงบันดาลใจและจิตสำนึกร่วมเพื่อรักษามรดกทางวัฒนธรรม ต่อยอดด้วยนวัตกรรม และสร้างสะพานเชื่อมช่างฝีมือชุมชนสู่งานออกแบบระดับสากล",
-      section1Title: "เป้าหมายและวิสัยทัศน์ (Our Vision)",
-      section1Desc: "เรามุ่งหวังที่จะเปลี่ยนมุมมองต่อหัตถกรรม จากเพียงผลิตภัณฑ์ของที่ระลึก สู่คุณค่าของ 'กระบวนการคิด' และ 'ฝีมือมนุษย์' ที่ไม่สามารถทดแทนด้วยเครื่องจักร สร้างความยั่งยืนที่แท้จริงให้ชุมชน",
-      pillarsTitle: "แกนหลักของศูนย์การตระหนักรู้",
-      pillars: [
-        {
-          title: "Exhibition & Gallery",
-          desc: "นิทรรศการหมุนเวียนจัดแสดงผลงานฝีมือดั้งเดิม เทียบเคียงกับชิ้นงานออกแบบร่วมสมัยเพื่อจุดประกายความคิดสร้างสรรค์ใหม่ๆ"
-        },
-        {
-          title: "Workshops & Dialogue",
-          desc: "เปิดพื้นที่เรียนรู้ แลกเปลี่ยนความรู้โดยช่างฝีมือตัวจริง ผ่านงานเวิร์กชอป สัมมนา ทอล์ก และการมีส่วนร่วมเชิงปฏิบัติการ"
-        },
-        {
-          title: "Craft Preservation",
-          desc: "การรวบรวม จดบันทึก และบันทึกประวัติศาสตร์เทคนิคงานฝีมือโบราณที่กำลังสูญหายให้ยังคงอยู่เพื่อการเรียนรู้ในอนาคต"
-        },
-        {
-          title: "Artistic Collaboration",
-          desc: "เปิดพื้นที่ร่วมมือระหว่างศิลปิน ดีไซเนอร์ยุคใหม่ และช่างฝีมือดั้งเดิม เพื่อสร้างสรรค์ผลงานข้ามสายอาชีพและนวัตกรรมใหม่"
-        }
-      ],
-      ctaTitle: "มาร่วมเป็นส่วนหนึ่งกับเราในการสร้างสรรค์และสืบสานคุณค่างานฝีมือดั้งเดิม",
-      ctaBtn: "สมัครเข้าร่วมเครือข่ายความร่วมมือ"
-    },
-    en: {
-      subtitle: "Vision and Awareness of Artistic Craftsmanship",
-      description: "An inspiring hub dedicated to preserving cultural heritage, advancing sustainable innovation, and building bridges between community artisans and global design networks.",
-      section1Title: "Our Core Vision",
-      section1Desc: "We aim to shift the perception of handcraft from mere souvenirs to the deep appreciation of the 'thought process' and 'human skill' that machinery can never replicate.",
-      pillarsTitle: "Our Core Pillars",
-      pillars: [
-        {
-          title: "Exhibition & Gallery",
-          desc: "Rotating curation displaying traditional masterpieces alongside contemporary designs to ignite fresh creative dialogs."
-        },
-        {
-          title: "Workshops & Dialogue",
-          desc: "Active learning spaces exchanging knowledge from genuine master artisans through interactive workshops, seminars, and talks."
-        },
-        {
-          title: "Craft Preservation",
-          desc: "Documenting, archiving, and cataloging endangered traditional craft techniques to keep them alive for future generations."
-        },
-        {
-          title: "Artistic Collaboration",
-          desc: "A cooperative playground inviting modern artists, designers, and native craftspeople to co-create multidisciplinary innovations."
-        }
-      ],
-      ctaTitle: "Join us in co-creating and sustaining the invaluable legacy of handcrafts.",
-      ctaBtn: "Collaborate With Us"
-    },
-    fr: {
-      subtitle: "Vision et Sensibilisation à l'Artisanat Artistique",
-      description: "Un espace inspirant dédié à la préservation du patrimoine culturel, à l'innovation durable, et à la création de liens entre les artisans locaux et le design mondial.",
-      section1Title: "Notre Vision",
-      section1Desc: "Nous visons à changer la perception de l'artisanat, passant d'un simple souvenir à l'appréciation du 'processus créatif' et du 'savoir-faire humain' irremplaçables.",
-      pillarsTitle: "Nos Piliers Fondateurs",
-      pillars: [
-        {
-          title: "Exposition & Galerie",
-          desc: "Des expositions temporaires présentant des chefs-d'œuvre traditionnels à côté de designs modernes pour susciter un dialogue créatif."
-        },
-        {
-          title: "Ateliers & Dialogue",
-          desc: "Des espaces d'apprentissage interactifs avec des maîtres artisans locaux à travers des ateliers, séminaires et discussions."
-        },
-        {
-          title: "Préservation de l'Artisanat",
-          desc: "Documenter et archiver les techniques artisanales en voie de disparition pour assurer leur transmission aux générations futures."
-        },
-        {
-          title: "Collaboration Artistique",
-          desc: "Un espace de co-création invitant les artistes contemporains et les artisans traditionnels à fusionner leurs univers."
-        }
-      ],
-      ctaTitle: "Rejoignez-nous pour co-créer et perpétuer l'héritage inestimable de l'artisanat.",
-      ctaBtn: "Collaborer avec nous"
-    }
-  };
+  const MISSION_PARAGRAPHS = [
+    "Artcrew Armada เป็นธุรกิจหัตถกรรมฐานรากที่มุ่งสร้างคุณค่าจากงานฝีมือ การใช้ทรัพยากรอย่างรู้คุณค่า และการพัฒนาชุมชนอย่างยั่งยืน เราเชื่อมโยงงานหัตถกรรมเข้ากับการสร้างความตระหนักด้านสิ่งแวดล้อม การสร้างอาชีพ และการถ่ายทอดองค์ความรู้สู่ชุมชน",
+    "ในอนาคต ข้าพเจ้ามุ่งพัฒนา Craft & Art Awareness Center ให้เป็นพื้นที่แห่งการเรียนรู้และการสร้างสรรค์สำหรับทุกคน",
+    "ข้าพเจ้าเชื่อว่า คุณค่าที่แท้จริงของงานหัตถกรรมไม่ได้อยู่เพียงการสร้างชิ้นงาน แต่คือการทำให้ผู้คนได้กลับมารู้สึกตัว ตระหนักรู้ และค้นพบคุณค่าภายในตนเอง"
+  ];
 
-  const content = localizedContent[lang as SupportedLanguage] || localizedContent.en;
+  const ICONS = [
+    { id: "learn", label: "LEARN", th: "องค์ความรู้", icon: "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" },
+    { id: "create", label: "CREATE", th: "สร้างสรรค์", icon: "M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" },
+    { id: "connect", label: "CONNECT", th: "เชื่อมโยงผู้คน", icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" },
+    { id: "share", label: "SHARE", th: "แบ่งปันคุณค่า", icon: "M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" },
+    { id: "sustain", label: "SUSTAIN", th: "เพื่ออนาคตที่ยั่งยืน", icon: "M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" },
+  ];
 
   return (
     <div className="pb-24">
       {/* Page Header */}
       <PageHero
         badge="AWARENESS CENTER"
-        title={s.title || "A Space for Art, Craft & Conscious Creation"}
-        desc={s.desc || "พื้นที่แห่งการเรียนรู้และสร้างสรรค์ เพื่อเชื่อมโยงผู้คน งานฝีมือ วัฒนธรรม และความตระหนักรู้ด้านสิ่งแวดล้อม"}
+        title="Craft & Art Awareness Center"
+        desc="พื้นที่แห่งการเรียนรู้และการสร้างสรรค์สำหรับทุกคน"
       />
 
       <div className="max-w-7xl mx-auto px-6 py-20 space-y-24">
+        {/* Mission Section */}
+        <div className="max-w-4xl mx-auto text-center space-y-12">
+          <h2 className="font-serif-display text-5xl md:text-6xl text-[#F5F2EA]">Mission</h2>
+          <div className="space-y-6">
+            {MISSION_PARAGRAPHS.map((text, idx) => (
+              <p key={idx} className="font-sans text-sm md:text-base text-[#F5F2EA]/80 leading-relaxed text-justify md:text-center indent-8 md:indent-0">
+                {text}
+              </p>
+            ))}
+          </div>
+        </div>
 
-      {/* Narrative Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-[#B08A3E]/5 p-8 lg:p-12 border border-[#B08A3E]/10">
-        <div className="space-y-6">
-          <h2 className="font-serif-display text-3xl text-[#F5F2EA]">{content.section1Title}</h2>
-          <p className="font-sans text-xs text-[#F5F2EA]/75 leading-relaxed">
-            {content.section1Desc}
-          </p>
-          <div className="pt-2">
-            <div className="flex items-center space-x-4">
-              <span className="h-[1px] w-12 bg-[#B08A3E]" />
-              <span className="font-sans text-[9px] font-bold tracking-widest text-[#B08A3E] uppercase">Awareness Center Vision</span>
+        {/* Full Image Section with Quote */}
+        <div className="relative border border-[#F5F2EA]/10 overflow-hidden group">
+          <div className="aspect-[16/9] md:aspect-[21/9] w-full bg-[#131313]">
+            <img 
+              src={`${R2_BASE}/craft-awareness-center.jpg`} 
+              alt="Craft & Art Awareness Center" 
+              className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+            />
+          </div>
+          
+          <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/40 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-[#111111]/80 via-transparent to-[#111111]/80"></div>
+
+          <div className="absolute inset-0 p-8 md:p-16 flex flex-col justify-between">
+            <div className="flex justify-between items-start">
+              <div className="space-y-2 max-w-sm hidden md:block">
+                <span className="font-sans text-[9px] font-bold tracking-widest uppercase text-[#B08A3E]">
+                  ARTCREW ARMADA CREATION & CRAFT HOUSE
+                </span>
+                <p className="font-sans text-xs text-[#F5F2EA]/60 uppercase tracking-widest">
+                  Creating with Meaning,<br/>Crafting a Better Future.
+                </p>
+              </div>
+              <div className="max-w-md text-right ml-auto">
+                <p className="font-serif-display text-lg md:text-2xl text-[#F5F2EA] leading-relaxed italic">
+                  “ คุณค่าที่แท้จริงของงานหัตถกรรม ไม่ได้อยู่เพียงการสร้างชิ้นงาน แต่คือการทำให้ผู้คนได้กลับมารู้สึกตัว ตระหนักรู้ และค้นพบคุณค่าภายในตนเอง ”
+                </p>
+              </div>
+            </div>
+
+            <div className="flex flex-col md:flex-row justify-between items-end gap-6">
+               <div className="space-y-4">
+                 <h3 className="font-serif-display text-3xl md:text-5xl text-[#F5F2EA] leading-tight">
+                   Craft & Art<br />Awareness Center
+                 </h3>
+                 <p className="font-sans text-sm text-[#F5F2EA]/80">
+                   พื้นที่แห่งการเรียนรู้และการสร้างสรรค์สำหรับทุกคน
+                 </p>
+               </div>
+               
+               <div className="text-right space-y-2 border-r-2 border-[#B08A3E] pr-4">
+                 <p className="font-serif-display text-xl text-[#F5F2EA]">From Material to Meaning.</p>
+                 <div className="flex flex-col text-[9px] font-bold text-[#AFAFA9] tracking-widest uppercase gap-1">
+                   <span>Craft</span>
+                   <span>People</span>
+                   <span>Community</span>
+                   <span>Sustainability</span>
+                 </div>
+               </div>
             </div>
           </div>
         </div>
-        <div className="aspect-[16/10] bg-[#F5F2EA]/5 flex items-center justify-center p-6 border border-[#F5F2EA]/10 relative overflow-hidden">
-          {/* SVG Abstract Line Decoration */}
-          <svg className="absolute inset-0 w-full h-full text-[#B08A3E]/20 stroke-current" viewBox="0 0 100 100" fill="none" preserveAspectRatio="none">
-            <path d="M10,90 Q50,10 90,90" strokeWidth="0.5" />
-            <path d="M20,90 Q50,20 80,90" strokeWidth="0.5" />
-          </svg>
-          <span className="font-serif-display text-sm italic text-[#F5F2EA]/30 relative z-10">Art & Craft Awareness Facility</span>
-        </div>
-      </div>
 
-      {/* Pillars Grid */}
-      <div className="space-y-12">
-        <div className="text-center space-y-3">
-          <span className="font-sans text-[9px] font-bold tracking-widest uppercase text-[#B08A3E]">Core Strategy</span>
-          <h2 className="font-serif-display text-3xl text-[#F5F2EA]">{content.pillarsTitle}</h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {content.pillars.map((pillar, idx) => (
-            <div key={idx} className="border border-[#F5F2EA]/10 p-6 bg-[#1A1A1A] space-y-4 hover:border-[#B08A3E]/30 hover:-translate-y-1 transition-all duration-300">
-              <div className="w-8 h-8 rounded-full bg-[#B08A3E]/10 border border-[#B08A3E]/20 flex items-center justify-center text-[#B08A3E] font-serif-display text-xs font-bold">
-                0{idx + 1}
+        {/* Icons Row */}
+        <div className="border-t border-b border-[#F5F2EA]/10 py-12">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
+            {ICONS.map((icon) => (
+              <div key={icon.id} className="flex flex-col items-center justify-center space-y-4 group cursor-default">
+                <div className="w-12 h-12 rounded-full border border-[#F5F2EA]/20 flex items-center justify-center text-[#B08A3E] group-hover:border-[#B08A3E] group-hover:bg-[#B08A3E]/10 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d={icon.icon} />
+                  </svg>
+                </div>
+                <div className="text-center space-y-1">
+                  <p className="font-sans text-[10px] font-bold tracking-widest text-[#F5F2EA] uppercase">
+                    {icon.label}
+                  </p>
+                  <p className="font-sans text-[10px] text-[#AFAFA9]">
+                    {icon.th}
+                  </p>
+                </div>
               </div>
-              <h3 className="font-serif-display text-xl text-[#F5F2EA]">{pillar.title}</h3>
-              <p className="font-sans text-xs text-[#AFAFA9] leading-relaxed">{pillar.desc}</p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
 
-      {/* Call To Action */}
-      <div className="bg-[#111111] text-[#F5F2EA] p-8 lg:p-12 text-center space-y-6">
-        <h3 className="font-serif-display text-2xl lg:text-3xl text-[#B08A3E] max-w-xl mx-auto leading-relaxed">
-          {content.ctaTitle}
-        </h3>
-        <button className="border border-[#B08A3E] px-8 py-3 font-sans text-xs font-bold tracking-widest uppercase hover:bg-[#B08A3E] hover:text-[#F5F2EA] transition-calm">
-          {content.ctaBtn}
-        </button>
-      </div>
+        {/* Call To Action */}
+        <div className="bg-[#1A1A1A] border border-[#B08A3E]/20 text-[#F5F2EA] p-12 text-center space-y-6">
+          <span className="font-sans text-[10px] font-bold tracking-widest uppercase text-[#B08A3E]">
+            Join The Movement
+          </span>
+          <h3 className="font-serif-display text-2xl lg:text-3xl text-[#F5F2EA] max-w-xl mx-auto leading-relaxed">
+            มาร่วมเป็นส่วนหนึ่งกับเราในการสร้างสรรค์และสืบสานคุณค่างานฝีมือดั้งเดิม
+          </h3>
+          <a href={`/${lang}/contact`} className="inline-block border border-[#B08A3E] px-8 py-3 font-sans text-xs font-bold tracking-widest uppercase text-[#B08A3E] hover:bg-[#B08A3E] hover:text-[#111111] transition-colors mt-4">
+            ติดต่อเข้าร่วมเครือข่ายความร่วมมือ
+          </a>
+        </div>
 
-    </div>
+      </div>
     </div>
   );
 }
-
-type SupportedLanguage = "th" | "en" | "fr";
