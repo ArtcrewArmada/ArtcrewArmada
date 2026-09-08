@@ -14,7 +14,7 @@ export default function About() {
   const s = (t.home as any).sections?.about || {};
 
   return (
-    <div className="bg-[#F7F4EF] min-h-screen text-[#F5F2EA]">
+    <div className="bg-[#111111] min-h-screen text-[#F5F2EA]">
       {/* 1. Hero & Philosophy */}
       <div className="pb-16">
         <PageHero
@@ -34,31 +34,37 @@ export default function About() {
 
       {/* Brand Story (Art, Craft & Conscious Creation) */}
       {about.story && (
-        <div className="max-w-4xl mx-auto px-6 py-16 md:py-24 space-y-20 border-b border-[#F5F2EA]/5">
-          <div className="space-y-8">
-            <h2 className="font-serif-display font-light text-3xl md:text-5xl text-[#F5F2EA] text-center">
-              {about.story.title}
-            </h2>
-            <div className="space-y-6 text-[#AFAFA9] font-sans text-xs md:text-sm leading-relaxed md:text-justify text-left">
-              <p className="font-bold text-[#F5F2EA] text-center mb-8">{about.story.intro}</p>
-              <p>{about.story.p1}</p>
-              <p>{about.story.p2}</p>
-              <p className="italic text-center py-4">{about.story.p3}</p>
-              <p>{about.story.p4}</p>
+        <div className="bg-[#151515] border-b border-[#F5F2EA]/5">
+          <div className="max-w-4xl mx-auto px-6 py-16 md:py-24 space-y-20">
+            <div className="space-y-8">
+              <span className="font-sans text-[10px] font-bold tracking-[0.45em] uppercase text-[#B08A3E] block text-center">
+                Our Story
+              </span>
+              <h2 className="font-serif-display font-light text-3xl md:text-5xl text-[#F5F2EA] text-center">
+                {about.story.title}
+              </h2>
+              <p className="font-sans text-sm text-[#F5F2EA]/80 text-center leading-relaxed">{about.story.intro}</p>
+              <div className="w-12 h-[1px] bg-[#B08A3E] mx-auto" />
+              <div className="space-y-5 text-[#AFAFA9] font-sans text-xs md:text-sm leading-relaxed md:text-justify text-left">
+                <p>{about.story.p1}</p>
+                <p>{about.story.p2}</p>
+                <p className="italic text-center py-4 text-[#F5F2EA]/70 text-base">{about.story.p3}</p>
+                <p>{about.story.p4}</p>
+              </div>
             </div>
-          </div>
 
-          <div className="space-y-8">
-            <h3 className="font-serif-display font-light text-2xl md:text-4xl text-[#B08A3E] text-center italic">
-              {about.story.subtitle}
-            </h3>
-            <div className="space-y-6 text-[#AFAFA9] font-sans text-xs md:text-sm leading-relaxed md:text-justify text-left">
-              <p>{about.story.p5}</p>
-              <p>{about.story.p6}</p>
-              <p>{about.story.p7}</p>
-              <div className="pt-8">
+            <div className="space-y-8 border-t border-[#F5F2EA]/10 pt-16">
+              <h3 className="font-serif-display font-light text-2xl md:text-4xl text-[#B08A3E] text-center italic">
+                {about.story.subtitle}
+              </h3>
+              <div className="space-y-5 text-[#AFAFA9] font-sans text-xs md:text-sm leading-relaxed md:text-justify text-left">
+                <p>{about.story.p5}</p>
+                <p>{about.story.p6}</p>
+                <p>{about.story.p7}</p>
+              </div>
+              <div className="pt-8 border border-[#B08A3E]/20 p-8 bg-[#1A1A1A]">
                 <p className="font-serif-display text-lg md:text-2xl text-[#F5F2EA] text-center italic tracking-wide">
-                  "{about.story.tagline}"
+                  &ldquo;{about.story.tagline}&rdquo;
                 </p>
               </div>
             </div>
@@ -389,16 +395,16 @@ export default function About() {
               <h3 className="font-serif-display text-2xl font-light text-[#F5F2EA] italic">"Craft. Community. Sustainability."</h3>
               <div className="w-12 h-[1px] bg-[#B08A3E] mx-auto mt-4"></div>
             </div>
-            <div className="absolute inset-0 bg-[#F7F4EF]/20 pointer-events-none"></div>
+            <div className="absolute inset-0 bg-[#B08A3E]/5 pointer-events-none"></div>
           </div>
         </div>
       </div>
 
       {/* 7. Vision: Craft & Art Awareness Center */}
       <div className="max-w-4xl mx-auto px-6 py-20">
-        <div className="border border-[#F5F2EA]/10 p-12 bg-[#1A1A1A] text-center space-y-6 relative">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#F7F4EF] px-4">
-            <Logo variant="emblem" theme="dark" className="w-8 h-8 opacity-60" />
+        <div className="border border-[#B08A3E]/30 p-12 bg-[#1A1A1A] text-center space-y-6 relative">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#111111] border border-[#B08A3E]/30 px-4 py-2">
+            <Logo variant="emblem" theme="dark" className="w-8 h-8 opacity-80" />
           </div>
           <h3 className="font-sans text-[10px] font-bold tracking-[0.45em] uppercase text-[#B08A3E]">
             {about.visionTitle}
