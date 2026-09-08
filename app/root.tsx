@@ -28,7 +28,11 @@ export const links = () => [
   },
   {
     rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600;700&family=Noto+Sans+Thai:wght@300;400;500;600;700&family=Noto+Serif+Thai:wght@300;400;500;600&display=swap",
+    href: "https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap",
+  },
+  {
+    rel: "stylesheet",
+    href: "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap",
   },
 ];
 
@@ -85,19 +89,19 @@ export function ErrorBoundary({ error }: any) {
   }
 
   return (
-    <main className="min-h-screen flex items-center justify-center p-8 bg-armada-ivory text-armada-navy">
+    <main className="min-h-screen flex items-center justify-center p-8 bg-[#131313] text-[#F5F2EA]">
       <div className="max-w-md text-center space-y-6">
-        <h1 className="font-headline font-light text-6xl text-armada-sand">{message}</h1>
-        <p className="font-sans text-xs uppercase tracking-widest text-armada-navy/60">{details}</p>
+        <h1 className="font-serif-display font-light text-6xl text-[#B08A3E]">{message}</h1>
+        <p className="font-sans text-xs uppercase tracking-widest text-[#AFAFA9]">{details}</p>
         {stack && (
-          <pre className="p-4 bg-armada-navy/5 text-[10px] text-left overflow-x-auto border border-armada-navy/10">
+          <pre className="p-4 bg-[#F5F2EA]/5 text-[10px] text-left overflow-x-auto border border-[#F5F2EA]/10">
             <code>{stack}</code>
           </pre>
         )}
         <div className="pt-4">
           <a
             href="/"
-            className="inline-block border border-armada-navy px-6 py-2.5 font-sans text-[10px] font-bold tracking-widest uppercase hover:bg-armada-navy hover:text-armada-ivory transition-calm"
+            className="inline-block border border-[#F5F2EA]/30 px-6 py-2.5 font-sans text-[10px] font-bold tracking-widest uppercase hover:bg-[#B08A3E] hover:text-[#F5F2EA] hover:border-[#B08A3E] transition-calm"
           >
             Go Back Home
           </a>

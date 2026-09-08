@@ -12,7 +12,7 @@ export function loader({ params }: { params: { lang?: string } }) {
 
 export default function PublicLayout() {
   return (
-    <div className="min-h-screen flex flex-col bg-armada-ivory">
+    <div className="min-h-screen flex flex-col bg-[#131313] text-[#F5F2EA] selection:bg-[#B08A3E]/30 selection:text-[#F5F2EA]">
       <Header />
       <main className="flex-grow">
         <Outlet />

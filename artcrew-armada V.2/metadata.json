@@ -1,0 +1,7 @@
+{
+  "name": "ArtCrew Armada",
+  "description": "ArtCrew Armada - Luxury atelier for upcycled art, fine jewelry, ancient craft, and sustainable haute craftsmanship.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

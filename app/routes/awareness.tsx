@@ -1,10 +1,12 @@
 import { useParams } from "react-router";
 import { getTranslation } from "~/locales/dictionary";
+import { PageHero } from "~/components/ui/page-hero";
 
 export default function AwarenessCenter() {
   const params = useParams();
   const lang = params.lang || "th";
   const t = getTranslation(lang);
+  const s = (t.home as any).sections?.awareness || {};
 
   const localizedContent = {
     th: {
@@ -93,74 +95,71 @@ export default function AwarenessCenter() {
   const content = localizedContent[lang as SupportedLanguage] || localizedContent.en;
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-20 space-y-24">
-      {/* Hero Header */}
-      <div className="space-y-6 max-w-3xl">
-        <span className="font-sans text-[10px] font-bold tracking-[0.45em] uppercase text-armada-sand">
-          {content.subtitle}
-        </span>
-        <h1 className="font-headline font-light text-5xl text-armada-navy leading-tight">
-          {t.nav.awareness}
-        </h1>
-        <p className="font-serif text-sm text-armada-navy/60 leading-relaxed">
-          {content.description}
-        </p>
-      </div>
+    <div className="pb-24">
+      {/* Page Header */}
+      <PageHero
+        badge="AWARENESS CENTER"
+        title={s.title || "A Space for Art, Craft & Conscious Creation"}
+        desc={s.desc || "พื้นที่แห่งการเรียนรู้และสร้างสรรค์ เพื่อเชื่อมโยงผู้คน งานฝีมือ วัฒนธรรม และความตระหนักรู้ด้านสิ่งแวดล้อม"}
+      />
+
+      <div className="max-w-7xl mx-auto px-6 py-20 space-y-24">
 
       {/* Narrative Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-armada-sand/5 p-8 lg:p-12 border border-armada-sand/10">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-[#B08A3E]/5 p-8 lg:p-12 border border-[#B08A3E]/10">
         <div className="space-y-6">
-          <h2 className="font-headline text-3xl text-armada-navy">{content.section1Title}</h2>
-          <p className="font-sans text-xs text-armada-navy/75 leading-relaxed">
+          <h2 className="font-serif-display text-3xl text-[#F5F2EA]">{content.section1Title}</h2>
+          <p className="font-sans text-xs text-[#F5F2EA]/75 leading-relaxed">
             {content.section1Desc}
           </p>
           <div className="pt-2">
             <div className="flex items-center space-x-4">
-              <span className="h-[1px] w-12 bg-armada-sand" />
-              <span className="font-sans text-[9px] font-bold tracking-widest text-armada-sand uppercase">Awareness Center Vision</span>
+              <span className="h-[1px] w-12 bg-[#B08A3E]" />
+              <span className="font-sans text-[9px] font-bold tracking-widest text-[#B08A3E] uppercase">Awareness Center Vision</span>
             </div>
           </div>
         </div>
-        <div className="aspect-[16/10] bg-armada-navy/5 flex items-center justify-center p-6 border border-armada-navy/10 relative overflow-hidden">
+        <div className="aspect-[16/10] bg-[#F5F2EA]/5 flex items-center justify-center p-6 border border-[#F5F2EA]/10 relative overflow-hidden">
           {/* SVG Abstract Line Decoration */}
-          <svg className="absolute inset-0 w-full h-full text-armada-sand/20 stroke-current" viewBox="0 0 100 100" fill="none" preserveAspectRatio="none">
+          <svg className="absolute inset-0 w-full h-full text-[#B08A3E]/20 stroke-current" viewBox="0 0 100 100" fill="none" preserveAspectRatio="none">
             <path d="M10,90 Q50,10 90,90" strokeWidth="0.5" />
             <path d="M20,90 Q50,20 80,90" strokeWidth="0.5" />
           </svg>
-          <span className="font-headline text-sm italic text-armada-navy/30 relative z-10">Art & Craft Awareness Facility</span>
+          <span className="font-serif-display text-sm italic text-[#F5F2EA]/30 relative z-10">Art & Craft Awareness Facility</span>
         </div>
       </div>
 
       {/* Pillars Grid */}
       <div className="space-y-12">
         <div className="text-center space-y-3">
-          <span className="font-sans text-[9px] font-bold tracking-widest uppercase text-armada-sand">Core Strategy</span>
-          <h2 className="font-headline text-3xl text-armada-navy">{content.pillarsTitle}</h2>
+          <span className="font-sans text-[9px] font-bold tracking-widest uppercase text-[#B08A3E]">Core Strategy</span>
+          <h2 className="font-serif-display text-3xl text-[#F5F2EA]">{content.pillarsTitle}</h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {content.pillars.map((pillar, idx) => (
-            <div key={idx} className="border border-armada-navy/10 p-6 bg-white space-y-4 hover:border-armada-sand/30 hover:-translate-y-1 transition-all duration-300">
-              <div className="w-8 h-8 rounded-full bg-armada-sand/10 border border-armada-sand/20 flex items-center justify-center text-armada-sand font-headline text-xs font-bold">
+            <div key={idx} className="border border-[#F5F2EA]/10 p-6 bg-[#1A1A1A] space-y-4 hover:border-[#B08A3E]/30 hover:-translate-y-1 transition-all duration-300">
+              <div className="w-8 h-8 rounded-full bg-[#B08A3E]/10 border border-[#B08A3E]/20 flex items-center justify-center text-[#B08A3E] font-serif-display text-xs font-bold">
                 0{idx + 1}
               </div>
-              <h3 className="font-headline text-xl text-armada-navy">{pillar.title}</h3>
-              <p className="font-sans text-xs text-armada-navy/60 leading-relaxed">{pillar.desc}</p>
+              <h3 className="font-serif-display text-xl text-[#F5F2EA]">{pillar.title}</h3>
+              <p className="font-sans text-xs text-[#AFAFA9] leading-relaxed">{pillar.desc}</p>
             </div>
           ))}
         </div>
       </div>
 
       {/* Call To Action */}
-      <div className="bg-armada-navy text-armada-ivory p-8 lg:p-12 text-center space-y-6">
-        <h3 className="font-headline text-2xl lg:text-3xl text-armada-sand max-w-xl mx-auto leading-relaxed">
+      <div className="bg-[#111111] text-[#F5F2EA] p-8 lg:p-12 text-center space-y-6">
+        <h3 className="font-serif-display text-2xl lg:text-3xl text-[#B08A3E] max-w-xl mx-auto leading-relaxed">
           {content.ctaTitle}
         </h3>
-        <button className="border border-armada-sand px-8 py-3 font-sans text-xs font-bold tracking-widest uppercase hover:bg-armada-sand hover:text-armada-navy transition-calm">
+        <button className="border border-[#B08A3E] px-8 py-3 font-sans text-xs font-bold tracking-widest uppercase hover:bg-[#B08A3E] hover:text-[#F5F2EA] transition-calm">
           {content.ctaBtn}
         </button>
       </div>
 
+    </div>
     </div>
   );
 }

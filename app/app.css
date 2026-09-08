@@ -33,23 +33,34 @@
 }
 
 @theme {
-  --color-armada-navy: #1E2A44;
-  --color-armada-sand: #C7A995;
-  --color-armada-ivory: #F7F4EF;
-  --color-armada-seablue: #557A8B;
-  --color-armada-sage: #8EA08F;
-  --color-armada-terracotta: #D17C5C;
+  /* V.2 Dark Atelier Palette */
+  --color-armada-charcoal: #131313;
+  --color-armada-pitch: #111111;
+  --color-armada-paper: #F5F2EA;
+  --color-armada-bronze: #B08A3E;
+  --color-armada-muted: #AFAFA9;
+  --color-armada-surface: #1A1A1A;
+  --color-armada-border: rgba(245, 242, 234, 0.1);
 
+  /* Legacy aliases for backwards compatibility with SaaS routes */
+  --color-armada-navy: #131313;
+  --color-armada-sand: #B08A3E;
+  --color-armada-ivory: #F5F2EA;
+  --color-armada-seablue: #AFAFA9;
+  --color-armada-sage: #2a2a2a;
+  --color-armada-terracotta: #B08A3E;
+
+  /* Typography */
+  --font-serif: 'EB Garamond', 'Cormorant Garamond', serif;
+  --font-sans: 'Hanken Grotesk', 'Matrice', -apple-system, BlinkMacSystemFont, 'Noto Sans Thai', sans-serif;
   --font-matrice: "Matrice", sans-serif;
-  --font-headline: "Cormorant Garamond", serif;
-  --font-sans: "Matrice", "Montserrat", "Noto Sans Thai", sans-serif;
-  --font-serif: "Noto Serif Thai", serif;
+  --font-headline: 'EB Garamond', serif;
 }
 
 html,
 body {
-  background-color: var(--color-armada-ivory);
-  color: var(--color-armada-navy);
+  background-color: var(--color-armada-charcoal);
+  color: var(--color-armada-paper);
   font-family: var(--font-sans);
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   -webkit-font-smoothing: antialiased;
@@ -58,33 +69,62 @@ body {
   padding: 0;
 }
 
-/* Custom Editorial scrollbar */
+/* Heading defaults */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  color: var(--color-armada-paper);
+}
+
+/* Text selection */
+::selection {
+  background-color: rgba(176, 138, 62, 0.3);
+  color: var(--color-armada-paper);
+}
+
+/* Custom Atelier Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--color-armada-ivory);
+  background: #111111;
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-armada-sand);
-  border-radius: 3px;
+  background: #2a2a2a;
+  border-radius: 0px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-armada-navy);
+  background: #B08A3E;
 }
 
-/* Base styles for Typography */
-h1, h2, h3, h4, h5, h6 {
-  color: var(--color-armada-navy);
+/* Material Symbols */
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Transition utility classes */
+/* Transition utility */
 .transition-calm {
   transition: all 400ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Editorial Fine Line Divider */
+/* Fine border */
 .border-fine {
-  border-color: rgba(30, 42, 68, 0.08);
+  border-color: rgba(245, 242, 234, 0.08);
+}
+
+/* Font Serif Display utility */
+.font-serif-display {
+  font-family: var(--font-serif);
 }

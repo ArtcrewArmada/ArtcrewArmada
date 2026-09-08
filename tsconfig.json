@@ -10,7 +10,8 @@
     "build",
     "dist",
     "edge-proxy",
-    "workers"
+    "workers",
+    "artcrew-armada V.2"
   ],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2022"],

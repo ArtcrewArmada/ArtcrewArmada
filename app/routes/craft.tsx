@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { useParams } from "react-router";
 import { getTranslation } from "~/locales/dictionary";
+import { PageHero } from "~/components/ui/page-hero";
 
 interface Project {
   id: number;
@@ -15,6 +16,7 @@ export default function Craft() {
   const params = useParams();
   const lang = params.lang || "th";
   const t = getTranslation(lang);
+  const s = (t.home as any).sections?.craft || {};
   
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
 
@@ -110,22 +112,17 @@ export default function Craft() {
   }, [selectedCategory]);
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-20 space-y-16">
+    <div className="pb-24">
       {/* Page Header */}
-      <div className="space-y-4">
-        <span className="font-sans text-[10px] font-bold tracking-[0.45em] uppercase text-armada-sand">
-          Creation & Craft
-        </span>
-        <h1 className="font-headline font-light text-5xl text-armada-navy">
-          {lang === "th" ? "งานสร้างสรรค์และงานฝีมือ" : "Creation & Craft Portfolio"}
-        </h1>
-        <p className="font-serif text-sm text-armada-navy/60 max-w-xl">
-          การทดลองเชิงสร้างสรรค์และการร่วมมือระหว่างช่างฝีมือดั้งเดิมกับดีไซเนอร์ร่วมสมัย เพื่อสะท้อนความเป็นไปได้ของความยั่งยืน
-        </p>
-      </div>
-
+      <PageHero
+        badge="CREATION & CRAFT"
+        title={s.title || "Craftsmanship meets Contemporary Design"}
+        desc={s.desc || "สำรวจงานฝีมือ เทคนิค และการออกแบบที่เราพัฒนาผ่านประสบการณ์กว่า 20 ปี"}
+      />
+      
+      <div className="max-w-7xl mx-auto px-6 py-20 space-y-16">
       {/* Category Pills Selector */}
-      <div className="flex flex-wrap gap-2 border-b border-armada-navy/10 pb-8">
+      <div className="flex flex-wrap gap-2 border-b border-[#F5F2EA]/10 pb-8">
         {categories.map((cat) => {
           const isSelected = selectedCategory === cat.id;
           const label = lang === "th" ? cat.labelTh : cat.labelEn;
@@ -135,8 +132,8 @@ export default function Craft() {
               onClick={() => setSelectedCategory(cat.id)}
               className={`px-4 py-2 font-sans text-[9px] font-bold tracking-widest uppercase border transition-calm ${
                 isSelected
-                  ? "bg-armada-navy border-armada-navy text-armada-ivory"
-                  : "bg-white border-armada-navy/10 text-armada-navy/60 hover:text-armada-navy hover:border-armada-navy/30"
+                  ? "bg-[#111111] border-[#F5F2EA]/30 text-[#F5F2EA]"
+                  : "bg-[#1A1A1A] border-[#F5F2EA]/10 text-[#AFAFA9] hover:text-[#F5F2EA] hover:border-[#F5F2EA]/30/30"
               }`}
             >
               {label}
@@ -151,12 +148,12 @@ export default function Craft() {
           {filteredProjects.map((project) => (
             <div
               key={project.id}
-              className="border border-armada-navy/10 p-6 space-y-6 bg-white transition-calm hover:-translate-y-1 hover:shadow-md flex flex-col justify-between"
+              className="border border-[#F5F2EA]/10 p-6 space-y-6 bg-[#1A1A1A] transition-calm hover:-translate-y-1 hover:shadow-md flex flex-col justify-between"
             >
               <div className="space-y-4">
                 {/* Image Placeholder with category representation */}
-                <div className="w-full aspect-[4/3] bg-armada-navy/5 flex items-center justify-center p-4 relative overflow-hidden">
-                  <span className="font-headline text-lg italic text-armada-navy/20 z-10">
+                <div className="w-full aspect-[4/3] bg-[#F5F2EA]/5 flex items-center justify-center p-4 relative overflow-hidden">
+                  <span className="font-serif-display text-lg italic text-[#F5F2EA]/20 z-10">
                     {project.title}
                   </span>
                   
@@ -169,31 +166,32 @@ export default function Craft() {
 
                 <div className="space-y-2">
                   <div className="flex justify-between items-center text-[10px] tracking-wider uppercase font-bold">
-                    <span className="text-armada-sand">
+                    <span className="text-[#B08A3E]">
                       {categories.find(c => c.id === project.category)?.labelEn}
                     </span>
-                    <span className="text-armada-navy/40">{project.year}</span>
+                    <span className="text-[#AFAFA9]/50">{project.year}</span>
                   </div>
-                  <h3 className="font-headline text-2xl text-armada-navy leading-snug">
+                  <h3 className="font-serif-display text-2xl text-[#F5F2EA] leading-snug">
                     {lang === "th" ? project.titleTh : project.title}
                   </h3>
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-armada-navy/5">
-                <span className="font-sans text-[8px] text-armada-navy/40 uppercase block">Material</span>
-                <span className="font-sans text-xs text-armada-navy/70">{project.material}</span>
+              <div className="pt-4 border-t border-[#F5F2EA]/5">
+                <span className="font-sans text-[8px] text-[#AFAFA9]/50 uppercase block">Material</span>
+                <span className="font-sans text-xs text-[#AFAFA9]">{project.material}</span>
               </div>
             </div>
           ))}
         </div>
       ) : (
-        <div className="border border-dashed border-armada-navy/20 p-16 text-center bg-white">
-          <p className="font-serif text-sm text-armada-navy/60">
+        <div className="border border-dashed border-[#F5F2EA]/20 p-16 text-center bg-[#1A1A1A]">
+          <p className="font-serif text-sm text-[#AFAFA9]">
             ไม่พบงานแสดงที่ตรงตามหมวดหมู่นี้
           </p>
         </div>
       )}
+    </div>
     </div>
   );
 }
