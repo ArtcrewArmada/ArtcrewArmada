@@ -401,17 +401,34 @@ export default function About() {
       </div>
 
       {/* 7. Vision: Craft & Art Awareness Center */}
-      <div className="max-w-4xl mx-auto px-6 py-20">
-        <div className="border border-[#B08A3E]/30 p-12 bg-[#1A1A1A] text-center space-y-6 relative">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#111111] border border-[#B08A3E]/30 px-4 py-2">
-            <Logo variant="emblem" theme="dark" className="w-8 h-8 opacity-80" />
-          </div>
-          <h3 className="font-sans text-[10px] font-bold tracking-[0.45em] uppercase text-[#B08A3E]">
+      <div className="max-w-5xl mx-auto px-6 py-20">
+        <div className="space-y-4 mb-10 text-center">
+          <span className="font-sans text-[10px] font-bold tracking-[0.45em] uppercase text-[#B08A3E] block">
+            Vision
+          </span>
+          <h2 className="font-serif-display font-light text-3xl md:text-4xl text-[#F5F2EA]">
             {about.visionTitle}
-          </h3>
-          <p className="font-serif text-sm text-[#AFAFA9] leading-relaxed max-w-2xl mx-auto">
+          </h2>
+          <p className="font-serif text-sm text-[#AFAFA9] leading-relaxed max-w-2xl mx-auto italic">
             {about.visionDesc}
           </p>
+        </div>
+
+        <div className="relative overflow-hidden border border-[#B08A3E]/30 group">
+          <img
+            src="https://pub-fbe4c0b88b1c4967a575e56eb5f39ecf.r2.dev/craft-awareness-center.jpg"
+            alt="Craft & Art Awareness Center — ArtcrewArmada Vision"
+            className="w-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/60 via-transparent to-transparent pointer-events-none" />
+          <div className="absolute bottom-6 left-6 right-6">
+            <span className="font-sans text-[9px] font-bold text-[#B08A3E] uppercase tracking-widest block mb-1">
+              ArtcrewArmada — Creation & Craft House
+            </span>
+            <p className="font-serif-display text-lg md:text-2xl text-[#F5F2EA] italic">
+              "Craft. Community. Sustainability."
+            </p>
+          </div>
         </div>
       </div>
     </div>
