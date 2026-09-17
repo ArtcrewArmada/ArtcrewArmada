@@ -1,4 +1,4 @@
-import { useParams } from "react-router";
+import { useParams, Link } from "react-router";
 import { getTranslation } from "~/locales/dictionary";
 import { PageHero } from "~/components/ui/page-hero";
 
@@ -8,35 +8,63 @@ export default function AwarenessCenter() {
   const params = useParams();
   const lang = params.lang || "th";
   const t = getTranslation(lang);
+  const a = (t as any).awareness || {};
   const s = (t.home as any).sections?.awareness || {};
 
   const MISSION_PARAGRAPHS = [
-    "Artcrew Armada เป็นธุรกิจหัตถกรรมฐานรากที่มุ่งสร้างคุณค่าจากงานฝีมือ การใช้ทรัพยากรอย่างรู้คุณค่า และการพัฒนาชุมชนอย่างยั่งยืน เราเชื่อมโยงงานหัตถกรรมเข้ากับการสร้างความตระหนักด้านสิ่งแวดล้อม การสร้างอาชีพ และการถ่ายทอดองค์ความรู้สู่ชุมชน",
-    "ในอนาคต ข้าพเจ้ามุ่งพัฒนา Craft & Art Awareness Center ให้เป็นพื้นที่แห่งการเรียนรู้และการสร้างสรรค์สำหรับทุกคน",
-    "ข้าพเจ้าเชื่อว่า คุณค่าที่แท้จริงของงานหัตถกรรมไม่ได้อยู่เพียงการสร้างชิ้นงาน แต่คือการทำให้ผู้คนได้กลับมารู้สึกตัว ตระหนักรู้ และค้นพบคุณค่าภายในตนเอง"
+    a.missionP1 || "Artcrew Armada เป็นธุรกิจหัตถกรรมฐานรากที่มุ่งสร้างคุณค่าจากงานฝีมือ การใช้ทรัพยากรอย่างรู้คุณค่า และการพัฒนาชุมชนอย่างยั่งยืน เราเชื่อมโยงงานหัตถกรรมเข้ากับการสร้างความตระหนักด้านสิ่งแวดล้อม การสร้างอาชีพ และการถ่ายทอดองค์ความรู้สู่ชุมชน",
+    a.missionP2 || "ในอนาคต ข้าพเจ้ามุ่งพัฒนา Craft & Art Awareness Center ให้เป็นพื้นที่แห่งการเรียนรู้และการสร้างสรรค์สำหรับทุกคน",
+    a.missionP3 || "ข้าพเจ้าเชื่อว่า คุณค่าที่แท้จริงของงานหัตถกรรมไม่ได้อยู่เพียงการสร้างชิ้นงาน แต่คือการทำให้ผู้คนได้กลับมารู้สึกตัว ตระหนักรู้ และค้นพบคุณค่าภายในตนเอง",
   ];
 
   const ICONS = [
-    { id: "learn", label: "LEARN", th: "องค์ความรู้", icon: "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" },
-    { id: "create", label: "CREATE", th: "สร้างสรรค์", icon: "M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" },
-    { id: "connect", label: "CONNECT", th: "เชื่อมโยงผู้คน", icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" },
-    { id: "share", label: "SHARE", th: "แบ่งปันคุณค่า", icon: "M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" },
-    { id: "sustain", label: "SUSTAIN", th: "เพื่ออนาคตที่ยั่งยืน", icon: "M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" },
+    {
+      id: "learn",
+      label: a.icons?.learn?.label || "LEARN",
+      text: a.icons?.learn?.text || (lang === "th" ? "องค์ความรู้" : "Knowledge & Wisdom"),
+      icon: "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253",
+    },
+    {
+      id: "create",
+      label: a.icons?.create?.label || "CREATE",
+      text: a.icons?.create?.text || (lang === "th" ? "สร้างสรรค์" : "Conscious Creation"),
+      icon: "M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z",
+    },
+    {
+      id: "connect",
+      label: a.icons?.connect?.label || "CONNECT",
+      text: a.icons?.connect?.text || (lang === "th" ? "เชื่อมโยงผู้คน" : "Community Network"),
+      icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z",
+    },
+    {
+      id: "share",
+      label: a.icons?.share?.label || "SHARE",
+      text: a.icons?.share?.text || (lang === "th" ? "แบ่งปันคุณค่า" : "Value Sharing"),
+      icon: "M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z",
+    },
+    {
+      id: "sustain",
+      label: a.icons?.sustain?.label || "SUSTAIN",
+      text: a.icons?.sustain?.text || (lang === "th" ? "เพื่ออนาคตที่ยั่งยืน" : "Sustainable Future"),
+      icon: "M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z",
+    },
   ];
 
   return (
     <div className="pb-24">
       {/* Page Header */}
       <PageHero
-        badge="AWARENESS CENTER"
-        title="Craft & Art Awareness Center"
-        desc="พื้นที่แห่งการเรียนรู้และการสร้างสรรค์สำหรับทุกคน"
+        badge={a.badge || (lang === "th" ? "ศูนย์สร้างความตระหนักรู้ด้านศิลปะ" : "CRAFT & ART AWARENESS CENTER")}
+        title={a.title || s.title || "Craft & Art Awareness Center"}
+        desc={a.desc || s.desc || (lang === "th" ? "พื้นที่แห่งการเรียนรู้และการสร้างสรรค์สำหรับทุกคน" : "A learning and creative sanctuary connecting people, crafts, culture, and environmental awareness.")}
       />
 
       <div className="max-w-7xl mx-auto px-6 py-20 space-y-24">
         {/* Mission Section */}
         <div className="max-w-4xl mx-auto text-center space-y-12">
-          <h2 className="font-serif-display text-5xl md:text-6xl text-[#F5F2EA]">Mission</h2>
+          <h2 className="font-serif-display text-5xl md:text-6xl text-[#F5F2EA]">
+            {a.missionTitle || "Mission"}
+          </h2>
           <div className="space-y-6">
             {MISSION_PARAGRAPHS.map((text, idx) => (
               <p key={idx} className="font-sans text-sm md:text-base text-[#F5F2EA]/80 leading-relaxed text-justify md:text-center indent-8 md:indent-0">
@@ -66,12 +94,12 @@ export default function AwarenessCenter() {
                   ARTCREW ARMADA CREATION & CRAFT HOUSE
                 </span>
                 <p className="font-sans text-xs text-[#F5F2EA]/60 uppercase tracking-widest">
-                  Creating with Meaning,<br/>Crafting a Better Future.
+                  {a.subtitle || "Creating with Meaning, Crafting a Better Future."}
                 </p>
               </div>
               <div className="max-w-md text-right ml-auto">
                 <p className="font-serif-display text-lg md:text-2xl text-[#F5F2EA] leading-relaxed italic">
-                  “ คุณค่าที่แท้จริงของงานหัตถกรรม ไม่ได้อยู่เพียงการสร้างชิ้นงาน แต่คือการทำให้ผู้คนได้กลับมารู้สึกตัว ตระหนักรู้ และค้นพบคุณค่าภายในตนเอง ”
+                  {a.quote || "“ คุณค่าที่แท้จริงของงานหัตถกรรม ไม่ได้อยู่เพียงการสร้างชิ้นงาน แต่คือการทำให้ผู้คนได้กลับมารู้สึกตัว ตระหนักรู้ และค้นพบคุณค่าภายในตนเอง ”"}
                 </p>
               </div>
             </div>
@@ -82,17 +110,19 @@ export default function AwarenessCenter() {
                    Craft & Art<br />Awareness Center
                  </h3>
                  <p className="font-sans text-sm text-[#F5F2EA]/80">
-                   พื้นที่แห่งการเรียนรู้และการสร้างสรรค์สำหรับทุกคน
+                   {a.desc || (lang === "th" ? "พื้นที่แห่งการเรียนรู้และการสร้างสรรค์สำหรับทุกคน" : "A space for learning and conscious creation for everyone")}
                  </p>
                </div>
                
                <div className="text-right space-y-2 border-r-2 border-[#B08A3E] pr-4">
-                 <p className="font-serif-display text-xl text-[#F5F2EA]">From Material to Meaning.</p>
+                 <p className="font-serif-display text-xl text-[#F5F2EA]">
+                   {a.fromMaterialToMeaning || "From Material to Meaning."}
+                 </p>
                  <div className="flex flex-col text-[9px] font-bold text-[#AFAFA9] tracking-widest uppercase gap-1">
-                   <span>Craft</span>
-                   <span>People</span>
-                   <span>Community</span>
-                   <span>Sustainability</span>
+                   <span>{lang === "fr" ? "Artisanat" : "Craft"}</span>
+                   <span>{lang === "fr" ? "Humain" : "People"}</span>
+                   <span>{lang === "fr" ? "Communauté" : "Community"}</span>
+                   <span>{lang === "fr" ? "Durabilité" : "Sustainability"}</span>
                  </div>
                </div>
             </div>
@@ -114,7 +144,7 @@ export default function AwarenessCenter() {
                     {icon.label}
                   </p>
                   <p className="font-sans text-[10px] text-[#AFAFA9]">
-                    {icon.th}
+                    {icon.text}
                   </p>
                 </div>
               </div>
@@ -125,14 +155,17 @@ export default function AwarenessCenter() {
         {/* Call To Action */}
         <div className="bg-[#1A1A1A] border border-[#B08A3E]/20 text-[#F5F2EA] p-12 text-center space-y-6">
           <span className="font-sans text-[10px] font-bold tracking-widest uppercase text-[#B08A3E]">
-            Join The Movement
+            {a.ctaBadge || "Join The Movement"}
           </span>
           <h3 className="font-serif-display text-2xl lg:text-3xl text-[#F5F2EA] max-w-xl mx-auto leading-relaxed">
-            มาร่วมเป็นส่วนหนึ่งกับเราในการสร้างสรรค์และสืบสานคุณค่างานฝีมือดั้งเดิม
+            {a.ctaTitle || (lang === "th" ? "มาร่วมเป็นส่วนหนึ่งกับเราในการสร้างสรรค์และสืบสานคุณค่างานฝีมือดั้งเดิม" : "Join us in co-creating and preserving the heritage of artisanal craftsmanship.")}
           </h3>
-          <a href={`/${lang}/contact`} className="inline-block border border-[#B08A3E] px-8 py-3 font-sans text-xs font-bold tracking-widest uppercase text-[#B08A3E] hover:bg-[#B08A3E] hover:text-[#111111] transition-colors mt-4">
-            ติดต่อเข้าร่วมเครือข่ายความร่วมมือ
-          </a>
+          <Link
+            to={`/${lang}/contact`}
+            className="inline-block border border-[#B08A3E] px-8 py-3 font-sans text-xs font-bold tracking-widest uppercase text-[#B08A3E] hover:bg-[#B08A3E] hover:text-[#111111] transition-colors mt-4"
+          >
+            {a.ctaBtn || (lang === "th" ? "ติดต่อเข้าร่วมเครือข่ายความร่วมมือ" : "Contact & Collaboration")}
+          </Link>
         </div>
 
       </div>

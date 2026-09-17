@@ -28,7 +28,7 @@ export const links = () => [
   },
   {
     rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap",
+    href: "https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&family=Noto+Sans+Thai:wght@300;400;500;600;700;800&family=Noto+Serif+Thai:wght@300;400;500;600;700;800&display=swap",
   },
   {
     rel: "stylesheet",
@@ -52,7 +52,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const lang = loaderData?.lang || "th";
 
   return (
-    <html lang={lang}>
+    <html lang={lang} data-lang={lang}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />

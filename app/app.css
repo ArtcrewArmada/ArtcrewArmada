@@ -50,11 +50,85 @@
   --color-armada-sage: #2a2a2a;
   --color-armada-terracotta: #B08A3E;
 
-  /* Typography */
-  --font-serif: 'EB Garamond', 'Cormorant Garamond', serif;
-  --font-sans: 'Hanken Grotesk', 'Matrice', -apple-system, BlinkMacSystemFont, 'Noto Sans Thai', sans-serif;
+  /* Typography Defaults */
+  --font-serif: 'EB Garamond', 'Noto Serif Thai', 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Hanken Grotesk', 'Noto Sans Thai', 'Matrice', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-matrice: "Matrice", sans-serif;
+  --font-headline: 'EB Garamond', 'Noto Serif Thai', serif;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Language-Aware Typography & Font Stacks
+   ───────────────────────────────────────────────────────────── */
+
+/* Thai Typography: Noto Serif Thai (Display/Headings) + Noto Sans Thai (Body) */
+html[lang="th"],
+[data-lang="th"] {
+  --font-serif: 'Noto Serif Thai', 'EB Garamond', serif;
+  --font-sans: 'Noto Sans Thai', 'Hanken Grotesk', 'Matrice', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-headline: 'Noto Serif Thai', serif;
+  font-family: var(--font-sans);
+  line-height: 1.7;
+  word-break: break-word;
+}
+
+html[lang="th"] h1,
+html[lang="th"] h2,
+html[lang="th"] h3,
+html[lang="th"] h4,
+html[lang="th"] h5,
+html[lang="th"] h6,
+html[lang="th"] .font-serif-display,
+[data-lang="th"] h1,
+[data-lang="th"] h2,
+[data-lang="th"] h3,
+[data-lang="th"] h4,
+[data-lang="th"] h5,
+[data-lang="th"] h6,
+[data-lang="th"] .font-serif-display {
+  font-family: var(--font-serif);
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+}
+
+/* Override extreme letter-spacing for Thai to prevent detached vowels/tone marks */
+html[lang="th"] .tracking-widest,
+html[lang="th"] .tracking-wider,
+html[lang="th"] [class*="tracking-["],
+[data-lang="th"] .tracking-widest,
+[data-lang="th"] .tracking-wider,
+[data-lang="th"] [class*="tracking-["] {
+  letter-spacing: 0.04em !important;
+}
+
+/* English & French Typography: EB Garamond (Headings) + Hanken Grotesk / Matrice (Body) */
+html[lang="en"],
+html[lang="fr"],
+[data-lang="en"],
+[data-lang="fr"] {
+  --font-serif: 'EB Garamond', 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Hanken Grotesk', 'Matrice', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-headline: 'EB Garamond', serif;
+  font-family: var(--font-sans);
+}
+
+html[lang="en"] h1,
+html[lang="en"] h2,
+html[lang="en"] h3,
+html[lang="en"] h4,
+html[lang="en"] h5,
+html[lang="en"] h6,
+html[lang="en"] .font-serif-display,
+html[lang="fr"] h1,
+html[lang="fr"] h2,
+html[lang="fr"] h3,
+html[lang="fr"] h4,
+html[lang="fr"] h5,
+html[lang="fr"] h6,
+html[lang="fr"] .font-serif-display,
+[data-lang="en"] .font-serif-display,
+[data-lang="fr"] .font-serif-display {
+  font-family: var(--font-serif);
 }
 
 html,
