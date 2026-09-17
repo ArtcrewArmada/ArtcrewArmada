@@ -101,6 +101,27 @@ export default function Craft() {
           captionEn: "Artisanal metal texturing and sculptural geometry process",
           captionFr: "Processus artisanal de texturation du métal et géométrie sculpturale",
         },
+        {
+          src: "/images/craft-expertise/texturing/img_4.jpg",
+          alt: "Hammered Sculptural Metal Cuff & Adornments",
+          captionTh: "กำไลข้อมือโลหะเคาะดุนลายสามมิติ งานฝีมือชั้นสูงสะท้อนอัตลักษณ์โบราณ",
+          captionEn: "Sculptural hand-hammered cuff bracelet with deep ancient relief textures",
+          captionFr: "Manchette sculpturale martelée à la main aux reliefs profonds ancestraux",
+        },
+        {
+          src: "/images/craft-expertise/texturing/img_5.jpg",
+          alt: "Precision Repoussé Metal Pattern Detail",
+          captionTh: "รายละเอียดพื้นผิวเคาะลาย Texture บนแผ่นโลหะทองเหลืองและเงินแท้",
+          captionEn: "Macro detail of artisanal repoussé chasing on solid brass and silver plates",
+          captionFr: "Détail macro du ciselage repoussé artisanal sur plaques de laiton et argent massif",
+        },
+        {
+          src: "/images/craft-expertise/texturing/img_6.jpg",
+          alt: "Masterpiece Chased Metal Armor & Jewelry Suite",
+          captionTh: "ชุดเครื่องประดับโลหะเคาะลายระดับมาสเตอร์พีซ ผสานความแข็งแกร่งและความประณีต",
+          captionEn: "Masterpiece hammered metal jewelry suite marrying raw strength with refined dexterity",
+          captionFr: "Parure de bijoux en métal martelé chef-d'œuvre alliant force brute et dextérité raffinée",
+        },
       ],
     },
     {
