@@ -902,6 +902,16 @@ export default function Craft() {
                             src={img.src}
                             alt={img.alt}
                             loading="lazy"
+                            onError={(e) => {
+                              // If image load fails momentarily during deployment, attempt 1 retry after 1.5s
+                              const target = e.currentTarget;
+                              if (!target.dataset.retried) {
+                                target.dataset.retried = "true";
+                                setTimeout(() => {
+                                  target.src = img.src + "?t=" + Date.now();
+                                }, 1500);
+                              }
+                            }}
                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-90 group-hover:opacity-100"
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-2 flex flex-col justify-end">
@@ -1001,6 +1011,15 @@ export default function Craft() {
               <img
                 src={activeLightbox.images[activeLightbox.currentIndex]?.src}
                 alt={activeLightbox.images[activeLightbox.currentIndex]?.alt}
+                onError={(e) => {
+                  const target = e.currentTarget;
+                  if (!target.dataset.retried) {
+                    target.dataset.retried = "true";
+                    setTimeout(() => {
+                      target.src = activeLightbox.images[activeLightbox.currentIndex]?.src + "?t=" + Date.now();
+                    }, 1500);
+                  }
+                }}
                 className="w-full h-full object-contain"
               />
 
@@ -1047,6 +1066,15 @@ export default function Craft() {
                     <img
                       src={thumb.src}
                       alt={thumb.alt}
+                      onError={(e) => {
+                        const target = e.currentTarget;
+                        if (!target.dataset.retried) {
+                          target.dataset.retried = "true";
+                          setTimeout(() => {
+                            target.src = thumb.src + "?t=" + Date.now();
+                          }, 1500);
+                        }
+                      }}
                       className="w-full h-full object-cover"
                     />
                   </button>
