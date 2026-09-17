@@ -767,19 +767,19 @@ export default function Craft() {
       </div>
 
       {/* 3. Sticky Quick-Filter Navigation */}
-      <div className="sticky top-16 z-30 bg-[#111111]/95 backdrop-blur-md border-b border-[#F5F2EA]/10 py-4 px-6 transition-all">
+      <div className="sticky top-16 z-30 bg-[#111111]/95 backdrop-blur-md border-b border-[#F5F2EA]/10 py-3 md:py-4 px-4 md:px-6 transition-all shadow-md">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4 overflow-x-auto no-scrollbar">
-          <span className="font-sans text-[9px] font-bold tracking-[0.25em] text-[#B08A3E] uppercase shrink-0 hidden md:inline-block">
+          <span className="font-sans text-xs font-bold tracking-[0.2em] text-[#B08A3E] uppercase shrink-0 hidden md:inline-block">
             {lang === "th" ? "หมวดความเชี่ยวชาญ" : lang === "fr" ? "DISCIPLINES" : "DISCIPLINES"} :
           </span>
 
           <div className="flex items-center gap-2 overflow-x-auto pb-1 md:pb-0 w-full md:w-auto">
             <button
               onClick={() => setSelectedPillar("all")}
-              className={`px-3.5 py-1.5 font-sans text-[10px] font-bold tracking-wider uppercase border transition-all shrink-0 ${
+              className={`px-3.5 py-2 font-sans text-xs font-bold tracking-wider uppercase border transition-all shrink-0 ${
                 selectedPillar === "all"
                   ? "bg-[#B08A3E] text-[#111111] border-[#B08A3E] shadow-sm"
-                  : "bg-[#1A1A1A] text-[#AFAFA9] border-[#F5F2EA]/10 hover:text-[#F5F2EA] hover:border-[#F5F2EA]/30"
+                  : "bg-[#1A1A1A] text-[#AFAFA9] border-[#F5F2EA]/15 hover:text-[#F5F2EA] hover:border-[#F5F2EA]/30"
               }`}
             >
               {lang === "th" ? "ทั้งหมด (All)" : lang === "fr" ? "Toutes" : "All Disciplines"}
@@ -792,10 +792,10 @@ export default function Craft() {
                 <button
                   key={p.id}
                   onClick={() => setSelectedPillar(p.id)}
-                  className={`px-3 py-1.5 font-sans text-[10px] font-bold tracking-wider uppercase border transition-all shrink-0 ${
+                  className={`px-3.5 py-2 font-sans text-xs font-bold tracking-wider uppercase border transition-all shrink-0 ${
                     isSelected
                       ? "bg-[#B08A3E] text-[#111111] border-[#B08A3E]"
-                      : "bg-[#1A1A1A] text-[#AFAFA9] border-[#F5F2EA]/10 hover:text-[#F5F2EA] hover:border-[#F5F2EA]/30"
+                      : "bg-[#1A1A1A] text-[#AFAFA9] border-[#F5F2EA]/15 hover:text-[#F5F2EA] hover:border-[#F5F2EA]/30"
                   }`}
                 >
                   {p.number}. {tagLabel}
@@ -807,7 +807,7 @@ export default function Craft() {
       </div>
 
       {/* 4. Craft Expertise Pillars Showcase */}
-      <div className="max-w-7xl mx-auto px-6 py-16 space-y-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 md:py-16 space-y-16 md:space-y-24">
         {filteredPillars.map((pillar) => {
           const currentTitle = lang === "th" ? pillar.titleTh : lang === "fr" ? pillar.titleFr : pillar.titleEn;
           const currentTag = lang === "th" ? pillar.tagTh : lang === "fr" ? pillar.tagFr : pillar.tagEn;
@@ -822,54 +822,54 @@ export default function Craft() {
               className="border border-[#F5F2EA]/10 bg-[#161616] transition-all hover:border-[#F5F2EA]/20 relative overflow-hidden"
             >
               {/* Top Accent Stripe with Number */}
-              <div className="flex items-center justify-between px-6 md:px-10 py-4 border-b border-[#F5F2EA]/10 bg-[#1A1A1A]">
+              <div className="flex items-center justify-between px-4 sm:px-6 md:px-10 py-3.5 md:py-4 border-b border-[#F5F2EA]/10 bg-[#1A1A1A]">
                 <div className="flex items-center gap-3">
-                  <span className="font-serif-display text-xl text-[#B08A3E] font-semibold">{pillar.number}</span>
+                  <span className="font-serif-display text-lg md:text-xl text-[#B08A3E] font-semibold">{pillar.number}</span>
                   <span className="h-3 w-[1px] bg-[#F5F2EA]/20"></span>
-                  <span className="font-sans text-[10px] font-bold tracking-[0.3em] uppercase text-[#F5F2EA]/70">
+                  <span className="font-sans text-xs font-bold tracking-[0.2em] uppercase text-[#F5F2EA]/80">
                     {currentTag}
                   </span>
                 </div>
-                <span className="font-sans text-[9px] uppercase tracking-widest text-[#AFAFA9]/50">
+                <span className="font-sans text-xs uppercase tracking-wider text-[#AFAFA9]/70">
                   {pillar.images.length} {lang === "th" ? "ชิ้นงานในอัลบั้ม" : lang === "fr" ? "œuvres" : "Gallery Works"}
                 </span>
               </div>
 
-              <div className="p-6 md:p-10 space-y-10">
+              <div className="p-4 sm:p-6 md:p-10 space-y-8 md:space-y-10">
                 {/* Header & Description Block */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                   <div className="lg:col-span-7 space-y-4">
-                    <h2 className="font-serif-display text-2xl md:text-4xl text-[#F5F2EA] font-light leading-snug">
+                    <h2 className="font-serif-display text-xl sm:text-2xl md:text-4xl text-[#F5F2EA] font-normal md:font-light leading-snug">
                       {currentTitle}
                     </h2>
-                    <p className="font-sans text-xs md:text-sm text-[#AFAFA9] leading-relaxed text-justify">
+                    <p className="font-sans text-sm sm:text-base text-[#F5F2EA]/90 leading-relaxed md:leading-loose text-left">
                       {currentDesc}
                     </p>
                   </div>
 
-                  <div className="lg:col-span-5 bg-[#121212] border border-[#F5F2EA]/10 p-6 space-y-5">
-                    <div className="space-y-2">
-                      <span className="font-sans text-[9px] font-bold tracking-widest text-[#B08A3E] uppercase block">
+                  <div className="lg:col-span-5 bg-[#121212] border border-[#F5F2EA]/10 p-5 md:p-6 space-y-5">
+                    <div className="space-y-2.5">
+                      <span className="font-sans text-xs font-bold tracking-widest text-[#B08A3E] uppercase block">
                         {lang === "th" ? "วัสดุและเครื่องมือหลัก" : lang === "fr" ? "Matériaux Principaux" : "Key Materials & Mediums"}
                       </span>
-                      <ul className="space-y-1 text-xs text-[#F5F2EA]/80 font-sans">
+                      <ul className="space-y-1.5 text-xs sm:text-sm text-[#F5F2EA]/85 font-sans">
                         {currentMaterials.map((m, idx) => (
                           <li key={idx} className="flex items-center gap-2">
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#B08A3E]/60"></span>
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#B08A3E]/70 shrink-0"></span>
                             <span>{m}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
 
-                    <div className="pt-4 border-t border-[#F5F2EA]/10 space-y-2">
-                      <span className="font-sans text-[9px] font-bold tracking-widest text-[#B08A3E] uppercase block">
+                    <div className="pt-4 border-t border-[#F5F2EA]/10 space-y-2.5">
+                      <span className="font-sans text-xs font-bold tracking-widest text-[#B08A3E] uppercase block">
                         {lang === "th" ? "จุดเด่นและเอกลักษณ์" : lang === "fr" ? "Signatures & Spécificités" : "Craft Signatures"}
                       </span>
-                      <ul className="space-y-1 text-xs text-[#AFAFA9] font-sans">
+                      <ul className="space-y-1.5 text-xs sm:text-sm text-[#AFAFA9] font-sans">
                         {currentFeatures.map((f, idx) => (
                           <li key={idx} className="flex items-start gap-2">
-                            <span className="text-[#B08A3E] text-[10px] mt-0.5">✦</span>
+                            <span className="text-[#B08A3E] text-xs mt-0.5 shrink-0">✦</span>
                             <span>{f}</span>
                           </li>
                         ))}
@@ -880,16 +880,16 @@ export default function Craft() {
 
                 {/* Gallery Grid for this Pillar */}
                 <div className="space-y-4 pt-4 border-t border-[#F5F2EA]/5">
-                  <div className="flex items-center justify-between">
-                    <span className="font-sans text-[9px] font-bold tracking-[0.25em] text-[#AFAFA9] uppercase">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                    <span className="font-sans text-xs font-bold tracking-[0.2em] text-[#AFAFA9] uppercase">
                       {lang === "th" ? "ผลงานตัวอย่างในพอร์ตโฟลิโอ" : lang === "fr" ? "Œuvres du Portfolio" : "Portfolio Masterpieces"}
                     </span>
-                    <span className="font-sans text-[9px] text-[#B08A3E]/70 italic">
-                      {lang === "th" ? "คลิกที่ภาพเพื่อดูรายละเอียดขนาดใหญ่" : lang === "fr" ? "Cliquer pour agrandir" : "Click image to expand"}
+                    <span className="font-sans text-xs text-[#B08A3E] italic">
+                      {lang === "th" ? "แตะที่ภาพเพื่อดูรูปขนาดใหญ่" : lang === "fr" ? "Cliquer pour agrandir" : "Tap image to view full size"}
                     </span>
                   </div>
 
-                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5 sm:gap-3">
                     {pillar.images.map((img, imgIdx) => {
                       const currentCaption = lang === "th" ? img.captionTh : lang === "fr" ? img.captionFr : img.captionEn;
                       return (
@@ -914,11 +914,11 @@ export default function Craft() {
                             }}
                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-90 group-hover:opacity-100"
                           />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-2 flex flex-col justify-end">
-                            <span className="font-sans text-[8px] text-[#F5F2EA] font-semibold line-clamp-2">
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-2 flex flex-col justify-end">
+                            <span className="font-sans text-[11px] sm:text-xs text-[#F5F2EA] font-semibold line-clamp-2">
                               {currentCaption}
                             </span>
-                            <span className="text-[#B08A3E] text-[8px] uppercase tracking-wider mt-1">
+                            <span className="text-[#B08A3E] text-[10px] sm:text-xs uppercase tracking-wider mt-1 font-bold">
                               Zoom 🔍
                             </span>
                           </div>
@@ -934,37 +934,37 @@ export default function Craft() {
       </div>
 
       {/* 5. Call To Action & Masterclass Banner */}
-      <div className="max-w-7xl mx-auto px-6 pt-12">
-        <div className="border border-[#B08A3E]/30 bg-[#161616] p-8 md:p-14 text-center relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-10 md:pt-12">
+        <div className="border border-[#B08A3E]/30 bg-[#161616] p-6 sm:p-8 md:p-14 text-center relative overflow-hidden">
           <div className="absolute top-0 right-0 w-32 h-32 bg-[#B08A3E]/5 rounded-full blur-2xl"></div>
-          <div className="max-w-3xl mx-auto space-y-6 relative z-10">
-            <span className="font-sans text-[10px] font-bold tracking-[0.4em] uppercase text-[#B08A3E]">
+          <div className="max-w-3xl mx-auto space-y-5 md:space-y-6 relative z-10">
+            <span className="font-sans text-xs font-bold tracking-[0.3em] uppercase text-[#B08A3E]">
               Masterclasses & Bespoke Commissions
             </span>
-            <h2 className="font-serif-display text-3xl md:text-5xl text-[#F5F2EA] font-light">
+            <h2 className="font-serif-display text-2xl sm:text-3xl md:text-5xl text-[#F5F2EA] font-light leading-snug">
               {lang === "th"
                 ? "ต่อยอดองค์ความรู้ และร่วมสร้างสรรค์ชิ้นงานเฉพาะบุคคล"
                 : lang === "fr"
                 ? "Apprendre l'Artisanat d'Art ou Commander une Œuvre Sur Mesure"
                 : "Learn the Ancient Crafts or Commission a Bespoke Creation"}
             </h2>
-            <p className="font-sans text-xs md:text-sm text-[#AFAFA9] leading-relaxed">
+            <p className="font-sans text-sm sm:text-base text-[#F5F2EA]/85 leading-relaxed">
               {lang === "th"
                 ? "เราเปิดสอนเวิร์กชอปถ่ายทอดทักษะงานหัตถกรรม 6 แขนงสู่ชุมชน และรับผลิตชิ้นงานเครื่องประดับ งานตกแต่ง และประติมากรรมสั่งทำพิเศษ (Bespoke Salon)"
                 : lang === "fr"
                 ? "Nous organisons des ateliers transmettant les 6 disciplines artisanales et réalisons des pièces sur mesure : bijoux d'art, décoration et installations spatiales."
                 : "We organize masterclasses transferring 6 artisan crafts to communities, and offer custom bespoke jewelry, home adornments, and spatial architectural commissions."}
             </p>
-            <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
+            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 pt-3 sm:pt-4">
               <Link
                 to={`/${lang}/learning`}
-                className="px-6 py-3 bg-[#B08A3E] text-[#111111] font-sans text-xs font-bold uppercase tracking-widest hover:bg-[#c49c48] transition-calm"
+                className="w-full sm:w-auto px-6 py-3 bg-[#B08A3E] text-[#111111] font-sans text-xs font-bold uppercase tracking-widest hover:bg-[#c49c48] transition-calm text-center"
               >
                 {lang === "th" ? "ดูตารางเวิร์กชอป & กิจกรรม" : lang === "fr" ? "Voir les Ateliers" : "View Masterclasses"}
               </Link>
               <Link
                 to={`/${lang}/contact`}
-                className="px-6 py-3 border border-[#F5F2EA]/20 text-[#F5F2EA] font-sans text-xs font-bold uppercase tracking-widest hover:border-[#F5F2EA]/60 hover:bg-[#1A1A1A] transition-calm"
+                className="w-full sm:w-auto px-6 py-3 border border-[#F5F2EA]/25 text-[#F5F2EA] font-sans text-xs font-bold uppercase tracking-widest hover:border-[#F5F2EA]/60 hover:bg-[#1A1A1A] transition-calm text-center"
               >
                 {lang === "th" ? "ปรึกษางานสั่งทำพิเศษ (Bespoke)" : lang === "fr" ? "Projet Sur Mesure" : "Inquire Bespoke Project"}
               </Link>
@@ -976,20 +976,20 @@ export default function Craft() {
       {/* 6. Lightbox Modal */}
       {activeLightbox && (
         <div
-          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-4 md:p-8 animate-fadeIn"
+          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 md:p-8 animate-fadeIn"
           onClick={() => setActiveLightbox(null)}
         >
           <div
-            className="relative max-w-4xl w-full max-h-[90vh] bg-[#161616] border border-[#F5F2EA]/20 p-4 md:p-6 flex flex-col justify-between space-y-4"
+            className="relative max-w-4xl w-full max-h-[92vh] bg-[#161616] border border-[#F5F2EA]/20 p-4 sm:p-6 flex flex-col justify-between space-y-4"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}
             <div className="flex items-center justify-between border-b border-[#F5F2EA]/10 pb-3">
-              <div>
-                <span className="font-sans text-[9px] uppercase tracking-widest text-[#B08A3E]">
+              <div className="pr-4">
+                <span className="font-sans text-[11px] sm:text-xs uppercase tracking-widest text-[#B08A3E] font-bold block">
                   {activeLightbox.pillarTitle}
                 </span>
-                <p className="font-serif-display text-sm md:text-base text-[#F5F2EA]">
+                <p className="font-serif-display text-sm sm:text-base md:text-lg text-[#F5F2EA] mt-0.5">
                   {lang === "th"
                     ? activeLightbox.images[activeLightbox.currentIndex]?.captionTh
                     : lang === "fr"
@@ -999,7 +999,7 @@ export default function Craft() {
               </div>
               <button
                 onClick={() => setActiveLightbox(null)}
-                className="text-[#AFAFA9] hover:text-[#F5F2EA] text-2xl font-light px-2"
+                className="text-[#AFAFA9] hover:text-[#F5F2EA] text-2xl font-light p-2 shrink-0 cursor-pointer"
                 aria-label="Close modal"
               >
                 ✕
@@ -1007,7 +1007,7 @@ export default function Craft() {
             </div>
 
             {/* Main Image in Lightbox */}
-            <div className="relative aspect-[4/3] md:aspect-[16/10] w-full bg-black/50 overflow-hidden flex items-center justify-center">
+            <div className="relative aspect-[4/3] md:aspect-[16/10] w-full bg-black/60 overflow-hidden flex items-center justify-center">
               <img
                 src={activeLightbox.images[activeLightbox.currentIndex]?.src}
                 alt={activeLightbox.images[activeLightbox.currentIndex]?.alt}
@@ -1028,14 +1028,14 @@ export default function Craft() {
                 <>
                   <button
                     onClick={prevLightboxImage}
-                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-[#B08A3E] text-white hover:text-black w-10 h-10 rounded-full flex items-center justify-center transition-calm"
+                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-[#B08A3E] text-white hover:text-black w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center transition-calm text-xl font-bold cursor-pointer"
                     aria-label="Previous image"
                   >
                     ‹
                   </button>
                   <button
                     onClick={nextLightboxImage}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-[#B08A3E] text-white hover:text-black w-10 h-10 rounded-full flex items-center justify-center transition-calm"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-[#B08A3E] text-white hover:text-black w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center transition-calm text-xl font-bold cursor-pointer"
                     aria-label="Next image"
                   >
                     ›
@@ -1045,21 +1045,21 @@ export default function Craft() {
             </div>
 
             {/* Modal Footer / Thumbnails */}
-            <div className="flex items-center justify-between pt-2 border-t border-[#F5F2EA]/10">
-              <span className="font-sans text-[10px] text-[#AFAFA9]">
+            <div className="flex items-center justify-between pt-2 border-t border-[#F5F2EA]/10 gap-3">
+              <span className="font-sans text-xs text-[#AFAFA9] shrink-0 font-medium">
                 {activeLightbox.currentIndex + 1} / {activeLightbox.images.length}
               </span>
 
-              <div className="flex gap-2 overflow-x-auto max-w-[60%]">
+              <div className="flex gap-2 overflow-x-auto max-w-[60%] py-1">
                 {activeLightbox.images.map((thumb, idx) => (
                   <button
                     key={idx}
                     onClick={() =>
                       setActiveLightbox({ ...activeLightbox, currentIndex: idx })
                     }
-                    className={`w-10 h-10 shrink-0 border overflow-hidden transition-all ${
+                    className={`w-10 h-10 sm:w-12 sm:h-12 shrink-0 border overflow-hidden transition-all cursor-pointer ${
                       idx === activeLightbox.currentIndex
-                        ? "border-[#B08A3E] opacity-100 scale-105"
+                        ? "border-[#B08A3E] opacity-100 scale-105 ring-1 ring-[#B08A3E]"
                         : "border-[#F5F2EA]/20 opacity-50 hover:opacity-100"
                     }`}
                   >
@@ -1083,7 +1083,7 @@ export default function Craft() {
 
               <button
                 onClick={() => setActiveLightbox(null)}
-                className="px-4 py-1.5 font-sans text-[10px] uppercase tracking-wider bg-[#1A1A1A] hover:bg-[#222222] border border-[#F5F2EA]/20 text-[#F5F2EA]"
+                className="px-4 py-2 font-sans text-xs font-semibold uppercase tracking-wider bg-[#1A1A1A] hover:bg-[#222222] border border-[#F5F2EA]/20 text-[#F5F2EA] shrink-0 cursor-pointer"
               >
                 {lang === "th" ? "ปิด" : lang === "fr" ? "Fermer" : "Close"}
               </button>

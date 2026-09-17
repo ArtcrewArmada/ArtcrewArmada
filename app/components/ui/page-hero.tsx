@@ -18,31 +18,31 @@ export function PageHero({ badge, title, desc, tagline }: PageHeroProps) {
       {/* Bottom fade */}
       <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#131313] to-transparent pointer-events-none" />
 
-      <div className="relative max-w-5xl mx-auto px-6 py-20 md:py-28 z-10">
+      <div className="relative max-w-5xl mx-auto px-6 py-12 sm:py-16 md:py-28 z-10">
         {/* Badge */}
-        <span className="inline-block font-sans text-[10px] font-bold tracking-[0.45em] uppercase text-[#B08A3E] border border-[#B08A3E]/30 px-4 py-1.5 mb-8">
+        <span className="inline-block font-sans text-[11px] sm:text-xs font-bold tracking-[0.25em] sm:tracking-[0.45em] uppercase text-[#B08A3E] border border-[#B08A3E]/30 px-3.5 py-1 sm:px-4 sm:py-1.5 mb-6 sm:mb-8">
           {badge}
         </span>
 
         {/* Headline */}
-        <h1 className="font-serif-display font-normal text-4xl md:text-5xl lg:text-6xl text-[#F5F2EA] leading-[1.1] tracking-tight max-w-4xl mb-6">
+        <h1 className="font-serif-display font-normal text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#F5F2EA] leading-[1.25] sm:leading-[1.2] md:leading-[1.1] tracking-normal sm:tracking-tight max-w-4xl mb-5 sm:mb-6">
           {title}
         </h1>
 
         {/* Description */}
-        <p className="font-sans text-base md:text-lg text-[#AFAFA9] max-w-2xl leading-relaxed">
+        <p className="font-sans text-sm sm:text-base md:text-lg text-[#F5F2EA]/85 max-w-2xl leading-relaxed">
           {desc}
         </p>
 
         {/* Optional tagline */}
         {tagline && (
-          <p className="mt-6 font-serif-display text-lg italic text-[#B08A3E]/80">
+          <p className="mt-4 sm:mt-6 font-serif-display text-base sm:text-lg italic text-[#B08A3E]">
             {tagline}
           </p>
         )}
 
         {/* Decorative bottom line */}
-        <div className="mt-12 h-px bg-gradient-to-r from-[#B08A3E]/40 via-[#F5F2EA]/10 to-transparent" />
+        <div className="mt-8 sm:mt-12 h-px bg-gradient-to-r from-[#B08A3E]/40 via-[#F5F2EA]/10 to-transparent" />
       </div>
     </section>
   );

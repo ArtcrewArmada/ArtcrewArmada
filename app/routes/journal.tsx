@@ -74,18 +74,18 @@ export default function Journal() {
       />
 
       {/* 2. Coming Soon Showcase */}
-      <div className="max-w-4xl mx-auto px-6 py-20 space-y-16">
-        <div className="border border-[#B08A3E]/30 bg-[#161616] p-10 md:p-16 text-center space-y-8 relative overflow-hidden">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-12 md:py-20 space-y-12 md:space-y-16">
+        <div className="border border-[#B08A3E]/30 bg-[#161616] p-6 sm:p-10 md:p-16 text-center space-y-6 md:space-y-8 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-48 h-48 bg-[#B08A3E]/5 rounded-full blur-3xl"></div>
 
           <div className="space-y-4 relative z-10">
-            <span className="inline-block px-3.5 py-1 text-[9px] font-sans font-bold tracking-[0.35em] uppercase bg-[#B08A3E]/10 border border-[#B08A3E]/30 text-[#B08A3E]">
+            <span className="inline-block px-3.5 py-1 text-xs font-sans font-bold tracking-[0.25em] uppercase bg-[#B08A3E]/10 border border-[#B08A3E]/30 text-[#B08A3E]">
               {lang === "th" ? "กำลังจัดเตรียมคลังบทความ" : lang === "fr" ? "ÉDITION EN COURS" : "EDITORIAL IN PROGRESS"}
             </span>
-            <h2 className="font-serif-display text-4xl md:text-6xl text-[#F5F2EA] font-light">
+            <h2 className="font-serif-display text-3xl sm:text-4xl md:text-6xl text-[#F5F2EA] font-light">
               Coming Soon
             </h2>
-            <p className="font-sans text-xs md:text-sm text-[#AFAFA9] max-w-xl mx-auto leading-relaxed">
+            <p className="font-sans text-sm md:text-base text-[#F5F2EA]/85 max-w-xl mx-auto leading-relaxed">
               {lang === "th"
                 ? "เรากำลังเรียบเรียงบทความวิจัย บันทึกกระบวนการสร้างสรรค์ และบทสัมภาษณ์ช่างฝีมือเพื่อเผยแพร่องค์ความรู้หัตถศิลป์สู่สาธารณะ ติดตามอ่านฉบับเต็มได้เร็วๆ นี้"
                 : lang === "fr"
@@ -95,29 +95,29 @@ export default function Journal() {
           </div>
 
           {/* Email Subscription Form */}
-          <div className="max-w-md mx-auto relative z-10 pt-4">
+          <div className="max-w-md mx-auto relative z-10 pt-2">
             {subscribed ? (
               <div className="p-4 bg-[#B08A3E]/10 border border-[#B08A3E]/40 text-center space-y-1">
-                <p className="font-sans text-xs font-bold text-[#F5F2EA]">
+                <p className="font-sans text-xs sm:text-sm font-bold text-[#F5F2EA]">
                   {lang === "th" ? "ขอบคุณสำหรับการติดตาม!" : lang === "fr" ? "Merci pour votre inscription !" : "Thank you for subscribing!"}
                 </p>
-                <p className="font-sans text-[10px] text-[#AFAFA9]">
+                <p className="font-sans text-xs text-[#AFAFA9]">
                   {lang === "th" ? "เราจะส่งบทความแรกให้คุณทันทีที่เปิดตัว" : lang === "fr" ? "Vous recevrez nos premières parutions." : "You'll receive our premiere essays upon publication."}
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-2">
+              <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-2.5">
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder={lang === "th" ? "ใส่อีเมลของคุณเพื่อรับบทความใหม่" : lang === "fr" ? "Votre adresse email" : "Enter email for editorial releases"}
                   required
-                  className="flex-1 bg-[#111111] border border-[#F5F2EA]/20 px-4 py-2.5 text-xs text-[#F5F2EA] placeholder-[#AFAFA9]/40 focus:outline-none focus:border-[#B08A3E] transition-calm"
+                  className="flex-1 bg-[#111111] border border-[#F5F2EA]/20 px-4 py-3 text-sm text-[#F5F2EA] placeholder-[#AFAFA9]/50 focus:outline-none focus:border-[#B08A3E] transition-calm"
                 />
                 <button
                   type="submit"
-                  className="px-6 py-2.5 bg-[#B08A3E] hover:bg-[#c49c48] text-[#111111] font-sans text-xs font-bold uppercase tracking-wider transition-calm"
+                  className="px-6 py-3 bg-[#B08A3E] hover:bg-[#c49c48] text-[#111111] font-sans text-xs font-bold uppercase tracking-wider transition-calm cursor-pointer"
                 >
                   {lang === "th" ? "ติดตามบทความ" : lang === "fr" ? "S'abonner" : "Subscribe"}
                 </button>
@@ -127,9 +127,9 @@ export default function Journal() {
         </div>
 
         {/* 3. Upcoming Essays Preview */}
-        <div className="space-y-8">
+        <div className="space-y-6 md:space-y-8">
           <div className="text-center space-y-2">
-            <span className="font-sans text-[9px] font-bold tracking-[0.3em] uppercase text-[#B08A3E]">
+            <span className="font-sans text-xs font-bold tracking-[0.25em] uppercase text-[#B08A3E]">
               {lang === "th" ? "บทความที่กำลังจะเผยแพร่" : lang === "fr" ? "PROCHAINES PARUTIONS" : "UPCOMING ESSAYS"}
             </span>
             <h3 className="font-serif-display text-2xl md:text-3xl text-[#F5F2EA] font-light">
@@ -137,7 +137,7 @@ export default function Journal() {
             </h3>
           </div>
 
-          <div className="space-y-6">
+          <div className="space-y-4 md:space-y-6">
             {upcomingEssays.map((post) => {
               const curCat = lang === "th" ? post.categoryTh : lang === "fr" ? post.categoryFr : post.categoryEn;
               const curTitle = lang === "th" ? post.titleTh : lang === "fr" ? post.titleFr : post.titleEn;
@@ -145,24 +145,24 @@ export default function Journal() {
               return (
                 <article
                   key={post.id}
-                  className="border border-[#F5F2EA]/10 bg-[#161616] p-6 md:p-8 grid grid-cols-1 md:grid-cols-12 gap-6 items-center hover:border-[#B08A3E]/40 transition-calm"
+                  className="border border-[#F5F2EA]/10 bg-[#161616] p-5 sm:p-6 md:p-8 grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 items-center hover:border-[#B08A3E]/40 transition-calm"
                 >
-                  <div className="md:col-span-3 aspect-[4/3] bg-[#111111] border border-[#F5F2EA]/5 flex items-center justify-center p-4">
-                    <span className="font-serif-display text-xs italic text-[#B08A3E]/50 tracking-wider">
+                  <div className="md:col-span-3 aspect-[16/9] md:aspect-[4/3] bg-[#111111] border border-[#F5F2EA]/5 flex items-center justify-center p-4">
+                    <span className="font-serif-display text-sm italic text-[#B08A3E]/70 tracking-wider font-medium">
                       Issue {post.id} • Draft
                     </span>
                   </div>
-                  <div className="md:col-span-9 space-y-3">
-                    <span className="font-sans text-[9px] font-bold tracking-widest text-[#B08A3E] uppercase">
+                  <div className="md:col-span-9 space-y-2 md:space-y-3">
+                    <span className="font-sans text-xs font-bold tracking-widest text-[#B08A3E] uppercase">
                       {curCat}
                     </span>
-                    <h4 className="font-serif-display text-xl md:text-2xl text-[#F5F2EA] font-light leading-snug">
+                    <h4 className="font-serif-display text-lg sm:text-xl md:text-2xl text-[#F5F2EA] font-light leading-snug">
                       {curTitle}
                     </h4>
-                    <p className="font-sans text-xs text-[#AFAFA9] leading-relaxed">
+                    <p className="font-sans text-xs sm:text-sm text-[#F5F2EA]/80 leading-relaxed">
                       {curExcerpt}
                     </p>
-                    <span className="inline-block text-[9px] font-sans font-bold uppercase tracking-widest text-[#F5F2EA]/40">
+                    <span className="inline-block text-xs font-sans font-bold uppercase tracking-widest text-[#F5F2EA]/50 pt-1">
                       {lang === "th" ? "ฉบับเต็มเร็วๆ นี้" : lang === "fr" ? "À paraître bientôt" : "Full Story Publishing Soon"}
                     </span>
                   </div>
