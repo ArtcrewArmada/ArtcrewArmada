@@ -1,15 +1,29 @@
 import { useState, useMemo } from "react";
-import { useParams } from "react-router";
+import { useParams, Link } from "react-router";
 import { getTranslation } from "~/locales/dictionary";
 import { PageHero } from "~/components/ui/page-hero";
 
-interface Project {
-  id: number;
-  title: string;
+interface CraftImage {
+  src: string;
+  alt: string;
+  captionTh?: string;
+  captionEn?: string;
+}
+
+interface CraftPillar {
+  id: string;
+  number: string;
   titleTh: string;
-  category: "jewelry" | "accessories" | "decorations" | "upcycling" | "textile" | "art-culture";
-  year: string;
-  material: string;
+  titleEn: string;
+  tagTh: string;
+  tagEn: string;
+  descTh: string;
+  descEn: string;
+  materialsTh: string[];
+  materialsEn: string[];
+  featuresTh: string[];
+  featuresEn: string[];
+  images: CraftImage[];
 }
 
 export default function Craft() {
@@ -17,181 +31,732 @@ export default function Craft() {
   const lang = params.lang || "th";
   const t = getTranslation(lang);
   const s = (t.home as any).sections?.craft || {};
-  
-  const [selectedCategory, setSelectedCategory] = useState<string>("all");
 
-  const categories = [
-    { id: "all", labelTh: "ทั้งหมด", labelEn: "All" },
-    { id: "jewelry", labelTh: "เครื่องประดับ (Jewelry)", labelEn: "Jewelry" },
-    { id: "accessories", labelTh: "เครื่องเคียง (Accessories)", labelEn: "Accessories" },
-    { id: "decorations", labelTh: "ของตกแต่ง (Decorations)", labelEn: "Decorations" },
-    { id: "upcycling", labelTh: "อัปไซคลิง (Upcycling)", labelEn: "Upcycling" },
-    { id: "textile", labelTh: "งานผ้า/สิ่งทอ (Textile)", labelEn: "Textile" },
-    { id: "art-culture", labelTh: "ศิลปะและวัฒนธรรม (Art & Culture)", labelEn: "Art & Culture" }
+  const [selectedPillar, setSelectedPillar] = useState<string>("all");
+  const [activeLightbox, setActiveLightbox] = useState<{
+    pillarTitle: string;
+    images: CraftImage[];
+    currentIndex: number;
+  } | null>(null);
+
+  const pillars: CraftPillar[] = [
+    {
+      id: "texturing",
+      number: "01",
+      titleTh: "ความเชี่ยวชาญด้านงานเครื่องประดับและงานโลหะ Texturing",
+      titleEn: "Metal Forming & Texturing",
+      tagTh: "งานขึ้นรูปโลหะ & เคาะลาย",
+      tagEn: "Chasing & Repoussé",
+      descTh:
+        "ข้าพเจ้ามีประสบการณ์ในการสร้างสรรค์งานเครื่องประดับและงานหัตถกรรมโลหะ การขึ้นรูปโลหะด้วยมือ การเคาะลาย (Texturing) เพื่อสร้างพื้นผิวและเอกลักษณ์เฉพาะของชิ้นงาน ซึ่งเป็นเทคนิคการดุนและเคาะโลหะให้เกิดมิติ ลวดลาย ผลงานเครื่องประดับทองเหลืองและเครื่องเงินในสไตล์ มาร์ปูเช่ สร้างมิติและปริมาตรขนาดใหญ่ ขณะเดียวกันยังคงน้ำหนักเบาและสวมใส่ได้จริง",
+      descEn:
+        "Specializing in bespoke handcrafted metal jewelry and artifacts through manual metal forming, repoussé, and chiseled texturing. Drawing inspiration from Mapuche tribal silversmithing, these brass and sterling silver creations boast dramatic volumetric silhouettes while remaining remarkably featherweight and comfortable for daily wear.",
+      materialsTh: ["ทองเหลืองบริสุทธิ์ (Brass)", "เครื่องเงิน (Sterling Silver)", "การเคาะลายดุนโลหะ (Chasing & Texturing)"],
+      materialsEn: ["Raw Brass", "Sterling Silver", "Manual Metal Chasing & Repoussé"],
+      featuresTh: [
+        "ขึ้นรูปโลหะด้วยมือทีละชิ้น (Hand-formed Metal)",
+        "เคาะลายสร้าง Texture มีมิติเฉพาะตัว",
+        "ดีไซน์สไตล์มาร์ปูเช่ (Mapuche Style) ทรงพลังแต่น้ำหนักเบา",
+      ],
+      featuresEn: [
+        "100% Hand-formed sculptural metals",
+        "Unique chased surface textures with optical depth",
+        "Mapuche-inspired monumental silhouette with ergonomic lightness",
+      ],
+      images: [
+        {
+          src: "/images/craft-expertise/texturing/img_1.jpg",
+          alt: "Brass Mapuche Collar & Metal Chasing",
+          captionTh: "ปลอกคอทองเหลืองสไตล์มาร์ปูเช่ (Brass Mapuche Collar) งานเคาะดุนลายมิติสูง",
+          captionEn: "Brass Mapuche Collar with chiseled repoussé dimensional textures",
+        },
+        {
+          src: "/images/craft-expertise/texturing/img_2.jpg",
+          alt: "Textured Silver & Brass Statement Jewelry",
+          captionTh: "เครื่องประดับเคาะลายขึ้นรูปด้วยมือ ผิวสัมผัสโลหะดิบร่วมสมัย",
+          captionEn: "Hand-formed textured metal statement jewelry with organic raw finish",
+        },
+        {
+          src: "/images/craft-expertise/texturing/img_3.jpg",
+          alt: "Artisan Metal Surface Texturing Process",
+          captionTh: "กระบวนการเคาะลายโลหะและขึ้นรูปทรงเรขาคณิตสามมิติ",
+          captionEn: "Artisanal metal texturing and sculptural geometry process",
+        },
+      ],
+    },
+    {
+      id: "peyote-stitch-bead-loom",
+      number: "02",
+      titleTh: "ความเชี่ยวชาญในการสร้างสรรค์งานลูกปัด ด้วยเทคนิค Peyote Stitch และ Bead Loom",
+      titleEn: "Peyote Stitch & Bead Loom Weaving",
+      tagTh: "การร้อยและทอลูกปัดชั้นสูง",
+      tagEn: "Precision Beadweaving",
+      descTh:
+        "ซึ่งเป็นเทคนิคการร้อยและทอลูกปัดที่ต้องอาศัยความละเอียด ความแม่นยำ และการวางแผนลวดลายอย่างเป็นระบบ เทคนิค Peyote Stitch ช่วยสร้างพื้นผิวและรูปทรงที่มีความหลากหลาย และเทคนิค Bead Loom เป็นการทอลูกปัดบนกี่ทอ ช่วยให้สามารถสร้างลวดลายที่ละเอียด คมชัด และมีความประณีตสูง",
+      descEn:
+        "Masterful beadweaving requiring mathematical precision, meticulous rhythm, and systematic chromatic mapping. Peyote Stitch allows freeform sculptural textures and organic dimensional curves, while the Bead Loom framework facilitates razor-sharp, tapestry-grade geometric motifs with museum-level finishing.",
+      materialsTh: ["ลูกปัดแก้วญี่ปุ่นมิยูกิ (Miyuki Glass Beads)", "กี่ทอลูกปัด (Bead Loom)", "เส้นด้ายทอความเหนียวพิเศษ"],
+      materialsEn: ["Japanese Miyuki Delica Beads", "Traditional Bead Loom", "High-tensile Braided Fiber"],
+      featuresTh: [
+        "Peyote Stitch สร้างรูปทรงอิสระและมิติโค้งเว้า",
+        "Bead Loom ทอบนกี่ทอ ลวดลายคมชัดละเอียดระดับพิกเซล",
+        "วางผังคู่สีและลวดลายเรขาคณิตโบราณร่วมสมัย",
+      ],
+      featuresEn: [
+        "Peyote Stitch for organic structural contours",
+        "Bead Loom for razor-sharp geometric precision",
+        "Curated ancient-meets-contemporary color harmonies",
+      ],
+      images: [
+        {
+          src: "/images/craft-expertise/peyote-stitch-bead-loom/img_1.jpg",
+          alt: "Peyote Stitch Woven Bracelet",
+          captionTh: "กำไลข้อมือร้อยลูกปัดเทคนิค Peyote Stitch ผิวสัมผัสประณีต",
+          captionEn: "Peyote stitch woven bracelet with tactile dimensional geometry",
+        },
+        {
+          src: "/images/craft-expertise/peyote-stitch-bead-loom/img_2.jpg",
+          alt: "Bead Loom Tapestry Cuff",
+          captionTh: "งานทอลูกปัดบนกี่ทอ Bead Loom ลวดลายเรขาคณิตคมชัด",
+          captionEn: "Bead loom woven tapestry cuff with high-contrast graphic motifs",
+        },
+        {
+          src: "/images/craft-expertise/peyote-stitch-bead-loom/img_3.jpg",
+          alt: "Intricate Beadweaving Pattern",
+          captionTh: "สร้อยคอทอลูกปัดผสมผสานลูกปัดแก้วและคู่สีธรรมชาติ",
+          captionEn: "Beaded necklace combining earthen hues with metallic accents",
+        },
+        {
+          src: "/images/craft-expertise/peyote-stitch-bead-loom/img_4.jpg",
+          alt: "Geometric Beadwork Architecture",
+          captionTh: "กำไลข้อมือลวดลายโครงสร้างสถาปัตยกรรมชนเผ่า",
+          captionEn: "Tribal architectural beadwork cuff with structured borders",
+        },
+        {
+          src: "/images/craft-expertise/peyote-stitch-bead-loom/img_5.jpg",
+          alt: "Color Harmony in Bead Weaving",
+          captionTh: "การจัดวางทฤษฎีสีในงานทอลูกปัดระดับมาสเตอร์พีซ",
+          captionEn: "Fine chromatic calibration across microscopic glass beads",
+        },
+        {
+          src: "/images/craft-expertise/peyote-stitch-bead-loom/img_6.jpg",
+          alt: "Artisan Bead Loom Crafting",
+          captionTh: "สร้อยคอและเครื่องประดับลูกปัดทอมือเต็มผืน",
+          captionEn: "Hand-loomed full tapestry beaded adornment piece",
+        },
+      ],
+    },
+    {
+      id: "wire-work",
+      number: "03",
+      titleTh: "ความเชี่ยวชาญในงานเครื่องประดับด้วยเทคนิค Wire Work",
+      titleEn: "Wire Work & Sculptural Wrapping",
+      tagTh: "งานขึ้นรูปและถักทอลวด",
+      tagEn: "Wire Sculpting & Gem Setting",
+      descTh:
+        "หรือการขึ้นรูปและถักทอดัดด้วยลวด ซึ่งเป็นกระบวนการเพื่อสร้างรูปทรง ลวดลาย และโครงสร้างที่มีเอกลักษณ์เฉพาะตัว เทคนิคดังกล่าวครอบคลุมการดัด ขด พัน และถักทอลวดเพื่อประกอบเป็นชิ้นงานเครื่องประดับ รวมถึงการประยุกต์ใช้ร่วมกับหินธรรมชาติ ลูกปัด และวัสดุอื่น ๆ เพื่อสร้างสรรค์ผลงาน",
+      descEn:
+        "Sculptural metal wire weaving and forming engineered to construct distinctive organic cages, flowing silhouettes, and structural architectural jewelry. Encompasses manual bending, spiral coiling, tension wrapping, and filigree weaving interlocking raw gemstones, crystals, and heritage minerals without chemical soldering.",
+      materialsTh: ["ลวดเงินแท้ (Sterling Silver Wire)", "ลวดทองเหลือง/ทองแดง", "หินอัญมณีธรรมชาติ (Natural Gemstones)"],
+      materialsEn: ["Sterling Silver Wire", "Artisan Brass & Copper Wires", "Raw Natural Gemstones & Minerals"],
+      featuresTh: [
+        "ดัด ขด พัน และถักทอลวดด้วยมือโดยไม่ใช้การบัดกรี",
+        "ออกแบบโอบรับหินธรรมชาติและผลึกแร่อย่างกลมกลืน",
+        "โครงสร้างแข็งแรง ทนทาน และมีเส้นสายศิลปะอ่อนช้อย",
+      ],
+      featuresEn: [
+        "Solderless wire weaving, tension-wrapping & spiral coiling",
+        "Custom organic cages harmonizing raw mineral geometries",
+        "Durable architecture with flowing artistic fluidity",
+      ],
+      images: [
+        {
+          src: "/images/craft-expertise/wire-work/img_1.jpg",
+          alt: "Wire Wrapped Agate Gemstone Pendant",
+          captionTh: "จี้หินธรรมชาติถักลวดเงินโอบรับผลึกแร่ (Wire Wrapped Gemstone Pendant)",
+          captionEn: "Natural gemstone wrapped in sculptural silver wire filigree",
+        },
+        {
+          src: "/images/craft-expertise/wire-work/img_2.jpg",
+          alt: "Sculptural Wire Wrapped Ring",
+          captionTh: "แหวนดัดลวดพันเกลียวโครงสร้างสามมิติ",
+          captionEn: "Dimensional wire coiled ring with organic gemstone centerpiece",
+        },
+        {
+          src: "/images/craft-expertise/wire-work/img_3.jpg",
+          alt: "Intricate Wire Weaving Pattern",
+          captionTh: "กำไลข้อมือถักทอลวดทองเหลืองและเส้นเงินโบราณ",
+          captionEn: "Woven brass and silver wire cuff with layered texture",
+        },
+        {
+          src: "/images/craft-expertise/wire-work/img_4.jpg",
+          alt: "Wire Work Ear Adornments",
+          captionTh: "ต่างหูดัดลวดทรงเรขาคณิตผสานลูกปัดแร่ธรรมชาติ",
+          captionEn: "Geometric wire formed earrings with suspended mineral droplets",
+        },
+        {
+          src: "/images/craft-expertise/wire-work/img_5.jpg",
+          alt: "Complex Gemstone Wire Setting",
+          captionTh: "จี้หินอัญมณีลายถักลวดซับซ้อนระดับไฮจิวเวลรี",
+          captionEn: "Complex woven wire bezel holding rough-cut mineral crystal",
+        },
+        {
+          src: "/images/craft-expertise/wire-work/img_6.jpg",
+          alt: "Artisan Wirework Collection",
+          captionTh: "ชุดเครื่องประดับงานดัดลวดผสานหินนำโชคธรรมชาติ",
+          captionEn: "Complete wire work artisan suite celebrating earth minerals",
+        },
+      ],
+    },
+    {
+      id: "chromatic-thread",
+      number: "04",
+      titleTh: "พัฒนาและประยุกต์ใช้เทคนิค Chromatic Thread",
+      titleEn: "Chromatic Thread & Color Harmony",
+      tagTh: "ศิลปะเส้นด้ายเรขาคณิตหลากสี",
+      tagEn: "Geometric Fiber Art",
+      descTh:
+        "ซึ่งเป็นกระบวนการสร้างสรรค์งานด้วยการพัน ถัก และจัดวางเส้นเชือกหลากสีให้เกิดรูปทรง มิติ และจังหวะของลวดลายที่มีเอกลักษณ์เฉพาะตัว เทคนิคดังกล่าวผสมผสานความรู้ด้านงานเส้นใย งานหัตถกรรม และหลักการด้านสีสัน (Color Harmony) เพื่อสร้างชิ้นงานที่สะท้อนความเคลื่อนไหว ความสมดุล และพลังของรูปทรงเรขาคณิต",
+      descEn:
+        "An innovative proprietary technique of precision wrapping, tension braiding, and geometric thread architecture using multi-hued fiber cords. Fusing fiber craft mastery with advanced Color Harmony theory, these kinetic pieces evoke movement, dynamic equilibrium, and the sacred resonance of sacred geometry.",
+      materialsTh: ["เส้นด้ายและเชือกคอตตอนหลากสี", "โครงสร้างโลหะ/ไม้รีไซเคิล", "เทคนิคทฤษฎีสี (Color Harmony)"],
+      materialsEn: ["Curated Chromatic Cotton Threads", "Recycled Metal / Wood Frameworks", "Color Harmony Optical Calibration"],
+      featuresTh: [
+        "จัดวางการไล่เฉดสี (Color Gradient) และคอนทราสต์ที่ลงตัว",
+        "ขึงและพันเส้นด้ายสร้างมิติแสงและเงาเชิงเรขาคณิต",
+        "สะท้อนพลังงาน ความเคลื่อนไหว และความสมดุลทางสายตา",
+      ],
+      featuresEn: [
+        "Calculated color gradient transitions and optical vibrations",
+        "Tensioned thread mapping casting intricate geometric shadowplay",
+        "Evokes cosmic motion, spiritual balance, and visual dynamism",
+      ],
+      images: [
+        {
+          src: "/images/craft-expertise/chromatic-thread/img_1.jpg",
+          alt: "Chromatic Thread Geometric Mandalas",
+          captionTh: "ศิลปะจัดวางเส้นด้าย Chromatic Thread ทรงกลมมันดาลา",
+          captionEn: "Chromatic Thread mandala disc with radial color gradients",
+        },
+        {
+          src: "/images/craft-expertise/chromatic-thread/img_2.jpg",
+          alt: "Threaded Color Rhythm Earrings",
+          captionTh: "ต่างหูพันเส้นด้ายหลากสี จังหวะคู่สีโมเดิร์นร่วมสมัย",
+          captionEn: "Contemporary thread-wrapped earrings in dynamic color palette",
+        },
+        {
+          src: "/images/craft-expertise/chromatic-thread/img_3.jpg",
+          alt: "Geometric Fiber Art Disc",
+          captionTh: "จี้และของตกแต่งพันเส้นด้ายเรขาคณิตมิติซ้อน",
+          captionEn: "Layered geometric fiber disc capturing kinetic light play",
+        },
+        {
+          src: "/images/craft-expertise/chromatic-thread/img_4.jpg",
+          alt: "Multi-layered Chromatic Thread Sculpture",
+          captionTh: "ประติมากรรมเส้นใยขนาดกะทัดรัด โครงสร้างเรขาคณิตซับซ้อน",
+          captionEn: "Intricate multi-axis thread sculpture with vibrant tensioning",
+        },
+        {
+          src: "/images/craft-expertise/chromatic-thread/img_5.jpg",
+          alt: "Chromatic Gradient Fiber Tapestry",
+          captionTh: "งานจัดวางเส้นด้ายผสานโทนสีธรรมชาติและสีสันสดใส",
+          captionEn: "Chromatic wall installation blending earthen and vivid fiber cords",
+        },
+        {
+          src: "/images/craft-expertise/chromatic-thread/img_6.jpg",
+          alt: "Chromatic Thread Artisan Suite",
+          captionTh: "ชุดงานคราฟต์ Chromatic Thread งานฝีมือเอกลักษณ์ของแบรนด์",
+          captionEn: "Signature Chromatic Thread collection demonstrating fiber mastery",
+        },
+      ],
+    },
+    {
+      id: "micro-macrame",
+      number: "05",
+      titleTh: "งานเครื่องประดับด้วยเทคนิค Micro Macramé",
+      titleEn: "Micro Macramé Jewelry",
+      tagTh: "ศิลปะผูกปมเส้นด้ายขนาดจิ๋ว",
+      tagEn: "Micro Cord Knotting",
+      descTh:
+        "ซึ่งเป็นศิลปะการผูกปมด้วยเส้นเชือกขนาดเล็กที่อาศัยความละเอียด ประณีต เทคนิคดังกล่าวสามารถสร้างลวดลายที่ซับซ้อนและมีเอกลักษณ์เฉพาะตัว โดยนำมาประยุกต์ใช้ร่วมกับหินธรรมชาติ ลูกปัด และวัสดุตกแต่งต่าง ๆ",
+      descEn:
+        "Haute artisan micro-knotting utilizing ultra-fine waxed polyester and linen cords. Operating at millimeter scale, this intricate knotwork constructs labyrinthine filigrees, organic bezel settings, and heirloom jewelry pieces seamlessly integrated with gemstones, raw minerals, and brass hardware.",
+      materialsTh: ["เส้นเชือกไมโครแว็กซ์ (Waxed Micro Cords)", "หินหลังเบี้ยธรรมชาติ (Cabochons)", "ลูกปัดทองเหลืองและเงินแท้"],
+      materialsEn: ["Ultra-fine Waxed Micro Cords", "Natural Gemstone Cabochons", "Brass & Silver Micro Beads"],
+      featuresTh: [
+        "ผูกปมด้วยมือขนาดมิลลิเมตร ละเอียดและแน่นหนา",
+        "โอบอุ้มหินธรรมชาติด้วยการถักโดยไม่ต้องพึ่งพากาว",
+        "ทนทาน กันน้ำ น้ำหนักเบา และสวมใส่สบายผิว",
+      ],
+      featuresEn: [
+        "Millimeter-level manual knotting with durable tension",
+        "Adhesive-free mechanical gem bezel knotting",
+        "Water-resistant, lightweight, and skin-friendly luxury comfort",
+      ],
+      images: [
+        {
+          src: "/images/craft-expertise/micro-macrame/img_1.jpg",
+          alt: "Micro Macramé Gemstone Choker",
+          captionTh: "โชคเกอร์ Micro Macramé โอบรับหินหลังเบี้ยธรรมชาติอย่างประณีต",
+          captionEn: "Micro Macramé choker framing polished natural gemstone cabochon",
+        },
+        {
+          src: "/images/craft-expertise/micro-macrame/img_2.jpg",
+          alt: "Intricate Micro Knotting Bracelet",
+          captionTh: "กำไลข้อมือผูกปมไมโครมาคราเม่ ลวดลายลูกไม้เรขาคณิต",
+          captionEn: "Geometric lace-patterned micro macramé cuff bracelet",
+        },
+        {
+          src: "/images/craft-expertise/micro-macrame/img_3.jpg",
+          alt: "Micro Macramé Earring Adornments",
+          captionTh: "ต่างหูไมโครมาคราเม่น้ำหนักเบา ผสานลูกปัดทองเหลืองโบราณ",
+          captionEn: "Featherweight micro macramé drop earrings with brass accents",
+        },
+        {
+          src: "/images/craft-expertise/micro-macrame/img_4.jpg",
+          alt: "Stone Wrapped Micro Macramé Pendant",
+          captionTh: "จี้หินอัญมณีถักปมเส้นเชือกจิ๋ว ดีไซน์ทรงเสน่ห์มนต์ขลัง",
+          captionEn: "Mystic talisman pendant woven with ultra-fine cord knots",
+        },
+        {
+          src: "/images/craft-expertise/micro-macrame/img_5.jpg",
+          alt: "Layered Micro Macramé Necklace",
+          captionTh: "สร้อยคอไมโครมาคราเม่หลายชั้น ประดับหินผลึกธรรมชาติ",
+          captionEn: "Layered statement micro macramé necklace with raw mineral stones",
+        },
+        {
+          src: "/images/craft-expertise/micro-macrame/img_6.jpg",
+          alt: "Micro Macramé Masterpiece Collection",
+          captionTh: "ชุดเครื่องประดับ Micro Macramé ความประณีตระดับงานพิพิธภัณฑ์",
+          captionEn: "Museum-grade micro macramé jewelry collection showcasing supreme dexterity",
+        },
+      ],
+    },
+    {
+      id: "macrame",
+      number: "06",
+      titleTh: "ความเชี่ยวชาญด้านงานของใช้ และของตกแต่งบ้านด้วยเทคนิค Macramé",
+      titleEn: "Macramé Home Décor & Spatial Installations",
+      tagTh: "งานของใช้ & ของตกแต่งบ้านมาคราเม่",
+      tagEn: "Architectural Knotting",
+      descTh:
+        "ข้าพเจ้ามีความเชี่ยวชาญในการสร้างสรรค์ของใช้และของตกแต่งบ้านด้วยเทคนิค Macramé ซึ่งเป็นศิลปะการผูกปมเชือกด้วยมือที่ผสมผสานความประณีตของงานหัตถกรรมเข้ากับการออกแบบร่วมสมัย ผลงานครอบคลุมทั้งของตกแต่งผนัง ฉากตกแต่ง กระถางแขวน โคมไฟ ของใช้ภายในบ้าน และงานตกแต่งพื้นที่สำหรับกิจกรรมหรืออีเวนต์",
+      descEn:
+        "Large-scale architectural and lifestyle cord knotting merging ancient bohemian heritage with sophisticated contemporary interior aesthetics. Spanning monumental wall tapestries, room dividers, ambient hanging lampshades, botanical plant hangers, and bespoke spatial art installations for luxury hospitality and exhibitions.",
+      materialsTh: ["เชือกฝ้ายธรรมชาติ 100% (Natural Cotton Cords)", "ท่อนไม้ดริฟต์วู้ดและกิ่งไม้ธรรมชาติ", "โครงสร้างทองเหลืองและเหล็กดัด"],
+      materialsEn: ["100% Natural Cotton Fiber Cords", "Reclaimed Driftwood & Organic Timber", "Brass Hoops & Architectural Steel"],
+      featuresTh: [
+        "งานตกแต่งผนัง (Wall Hanging) และฉากกั้นห้องขนาดใหญ่",
+        "โคมไฟแขวน กระถางต้นไม้ และของใช้ภายในบ้านแบบมีเอกลักษณ์",
+        "งานออกแบบพื้นที่เฉพาะ (Site-specific Installation) สำหรับอีเวนต์และโรงแรม",
+      ],
+      featuresEn: [
+        "Monumental wall tapestries & architectural partition screens",
+        "Bespoke ambient lighting chandeliers & botanical hangers",
+        "Site-specific spatial installations for luxury events and venues",
+      ],
+      images: [
+        {
+          src: "/images/craft-expertise/macrame/img_1.jpg",
+          alt: "Monumental Macramé Wall Tapestry",
+          captionTh: "โมบายถักแขวนผนังมาคราเม่ผืนใหญ่ (Macramé Wall Tapestry) เส้นสายธรรมชาติ",
+          captionEn: "Large-scale macramé wall hanging with cascading natural cotton fringe",
+        },
+        {
+          src: "/images/craft-expertise/macrame/img_2.jpg",
+          alt: "Macramé Hanging Lantern Lampshade",
+          captionTh: "โคมไฟแขวนมาคราเม่ กระจายแสงเงาอบอุ่นสร้างบรรยากาศ",
+          captionEn: "Hand-knotted macramé pendant lampshade casting warm ambient shadows",
+        },
+        {
+          src: "/images/craft-expertise/macrame/img_3.jpg",
+          alt: "Botanical Macramé Plant Hanger",
+          captionTh: "ที่แขวนกระถางต้นไม้มาคราเม่ เพิ่มพื้นที่สีเขียวในบ้านอย่างมีสไตล์",
+          captionEn: "Botanical macramé plant hanger integrating greenery into interiors",
+        },
+        {
+          src: "/images/craft-expertise/macrame/img_4.jpg",
+          alt: "Macramé Room Partition Screen",
+          captionTh: "ฉากกั้นห้องและม่านตกแต่งมาคราเม่ กรองแสงอย่างนุ่มนวล",
+          captionEn: "Macramé room divider partition filtering soft daylight",
+        },
+        {
+          src: "/images/craft-expertise/macrame/img_5.jpg",
+          alt: "Macramé Living Accessories",
+          captionTh: "ของใช้และของตกแต่งโต๊ะอาหารสไตล์ Eco-Artisan",
+          captionEn: "Eco-artisan dining and living accessories with textured knotwork",
+        },
+        {
+          src: "/images/craft-expertise/macrame/img_6.jpg",
+          alt: "Spatial Event Macramé Installation",
+          captionTh: "งานตกแต่งสถานที่และพื้นที่จัดกิจกรรมด้วยศิลปะมาคราเม่ร่วมสมัย",
+          captionEn: "Contemporary spatial macramé installation for curated events and showcases",
+        },
+      ],
+    },
   ];
 
-  const projects: Project[] = [
-    {
-      id: 1,
-      title: "Brass Mapuche Collar",
-      titleTh: "ปลอกคอทองเหลืองสไตล์มาปูเช่",
-      category: "jewelry",
-      year: "2025",
-      material: "Brass & Metal Chasing"
-    },
-    {
-      id: 2,
-      title: "Peyote Stitch Cuff",
-      titleTh: "กำไลข้อมือร้อยลูกปัดเปโยเต้",
-      category: "accessories",
-      year: "2026",
-      material: "Bead Loom & Peyote Stitch"
-    },
-    {
-      id: 3,
-      title: "Macramé Wall Hanging",
-      titleTh: "โมบายถักแขวนผนังมาคราเม่",
-      category: "decorations",
-      year: "2025",
-      material: "Cotton Fiber Knotting"
-    },
-    {
-      id: 4,
-      title: "Eco-Luxury Pull-Tab Clutch",
-      titleTh: "กระเป๋าคลัตช์ฝาดึงกระป๋องหรู",
-      category: "upcycling",
-      year: "2026",
-      material: "Aluminum Pull-Tabs & Reclaimed Leather"
-    },
-    {
-      id: 5,
-      title: "Natural Indigo Dyed Scarf",
-      titleTh: "ผ้าพันคอย้อมครามธรรมชาติ",
-      category: "textile",
-      year: "2026",
-      material: "Handwoven Cotton Yarn"
-    },
-    {
-      id: 6,
-      title: "Clay Vessels of Chao Phraya",
-      titleTh: "หม้อดินเผาลุ่มน้ำเจ้าพระยา",
-      category: "art-culture",
-      year: "2025",
-      material: "Local Terracotta Clay"
-    },
-    {
-      id: 7,
-      title: "Wire Wrapped Agate Pendant",
-      titleTh: "จี้หินอัญมณีดัดลวดเงิน",
-      category: "jewelry",
-      year: "2025",
-      material: "Sterling Silver Wire & Agate Stone"
-    },
-    {
-      id: 8,
-      title: "Upcycled Leather Backpack",
-      titleTh: "กระเป๋าเป้หนังอัปไซคลิง",
-      category: "upcycling",
-      year: "2026",
-      material: "Factory Leather Scraps & Canvas"
-    },
-    {
-      id: 9,
-      title: "Chromatic Fiber Installation",
-      titleTh: "ศิลปะจัดวางเส้นด้ายหลากสี",
-      category: "art-culture",
-      year: "2026",
-      material: "Colored threads & Reclaimed Wood structure"
-    }
-  ];
+  const filteredPillars = useMemo(() => {
+    if (selectedPillar === "all") return pillars;
+    return pillars.filter((p) => p.id === selectedPillar);
+  }, [selectedPillar]);
 
-  // Filter projects by category
-  const filteredProjects = useMemo(() => {
-    if (selectedCategory === "all") return projects;
-    return projects.filter(p => p.category === selectedCategory);
-  }, [selectedCategory]);
+  const openLightbox = (pillarTitle: string, images: CraftImage[], index: number) => {
+    setActiveLightbox({
+      pillarTitle,
+      images,
+      currentIndex: index,
+    });
+  };
+
+  const nextLightboxImage = () => {
+    if (!activeLightbox) return;
+    setActiveLightbox({
+      ...activeLightbox,
+      currentIndex: (activeLightbox.currentIndex + 1) % activeLightbox.images.length,
+    });
+  };
+
+  const prevLightboxImage = () => {
+    if (!activeLightbox) return;
+    setActiveLightbox({
+      ...activeLightbox,
+      currentIndex:
+        (activeLightbox.currentIndex - 1 + activeLightbox.images.length) %
+        activeLightbox.images.length,
+    });
+  };
 
   return (
-    <div className="pb-24">
-      {/* Page Header */}
+    <div className="bg-[#111111] text-[#F5F2EA] min-h-screen pb-28">
+      {/* 1. Page Header */}
       <PageHero
         badge="CREATION & CRAFT"
-        title={s.title || "Craftsmanship meets Contemporary Design"}
-        desc={s.desc || "สำรวจงานฝีมือ เทคนิค และการออกแบบที่เราพัฒนาผ่านประสบการณ์กว่า 20 ปี"}
+        title={s.title || "Craftsmanship Meets Contemporary Design"}
+        desc={
+          lang === "th"
+            ? "สำรวจ 6 เสาหลักแห่งความเชี่ยวชาญด้านงานหัตถศิลป์ (Craft Expertise) ที่พัฒนาและสั่งสมผ่านประสบการณ์กว่า 20 ปี"
+            : "Explore the 6 core pillars of Craft Expertise, honed through 20+ years of mastery in jewelry, metals, fiber, and spatial arts."
+        }
       />
-      
-      <div className="max-w-7xl mx-auto px-6 py-20 space-y-16">
-      {/* Category Pills Selector */}
-      <div className="flex flex-wrap gap-2 border-b border-[#F5F2EA]/10 pb-8">
-        {categories.map((cat) => {
-          const isSelected = selectedCategory === cat.id;
-          const label = lang === "th" ? cat.labelTh : cat.labelEn;
-          return (
-            <button
-              key={cat.id}
-              onClick={() => setSelectedCategory(cat.id)}
-              className={`px-4 py-2 font-sans text-[9px] font-bold tracking-widest uppercase border transition-calm ${
-                isSelected
-                  ? "bg-[#111111] border-[#F5F2EA]/30 text-[#F5F2EA]"
-                  : "bg-[#1A1A1A] border-[#F5F2EA]/10 text-[#AFAFA9] hover:text-[#F5F2EA] hover:border-[#F5F2EA]/30/30"
-              }`}
-            >
-              {label}
-            </button>
-          );
-        })}
+
+      {/* 2. Overview Metrics & Manifesto Strip */}
+      <div className="border-b border-[#F5F2EA]/10 bg-[#151515]">
+        <div className="max-w-7xl mx-auto px-6 py-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div className="border-r border-[#F5F2EA]/10 last:border-r-0">
+              <span className="font-serif-display text-3xl md:text-4xl text-[#B08A3E] font-light">20+</span>
+              <p className="font-sans text-[10px] text-[#AFAFA9] uppercase tracking-wider mt-1">
+                {lang === "th" ? "ปีแห่งประสบการณ์สร้างสรรค์" : "Years Craft Mastery"}
+              </p>
+            </div>
+            <div className="border-r border-[#F5F2EA]/10 last:border-r-0">
+              <span className="font-serif-display text-3xl md:text-4xl text-[#B08A3E] font-light">6</span>
+              <p className="font-sans text-[10px] text-[#AFAFA9] uppercase tracking-wider mt-1">
+                {lang === "th" ? "ศาสตร์ความเชี่ยวชาญหลัก" : "Core Craft Disciplines"}
+              </p>
+            </div>
+            <div className="border-r border-[#F5F2EA]/10 last:border-r-0">
+              <span className="font-serif-display text-3xl md:text-4xl text-[#B08A3E] font-light">100%</span>
+              <p className="font-sans text-[10px] text-[#AFAFA9] uppercase tracking-wider mt-1">
+                {lang === "th" ? "งานทำมือประณีตทุกชิ้น" : "Handcrafted In-House"}
+              </p>
+            </div>
+            <div>
+              <span className="font-serif-display text-3xl md:text-4xl text-[#B08A3E] font-light">WCC</span>
+              <p className="font-sans text-[10px] text-[#AFAFA9] uppercase tracking-wider mt-1">
+                {lang === "th" ? "มาตรฐานเวทีสากล" : "World Crafts Recognition"}
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* Projects Grid */}
-      {filteredProjects.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProjects.map((project) => (
-            <div
-              key={project.id}
-              className="border border-[#F5F2EA]/10 p-6 space-y-6 bg-[#1A1A1A] transition-calm hover:-translate-y-1 hover:shadow-md flex flex-col justify-between"
+      {/* 3. Sticky Quick-Filter Navigation */}
+      <div className="sticky top-16 z-30 bg-[#111111]/95 backdrop-blur-md border-b border-[#F5F2EA]/10 py-4 px-6 transition-all">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4 overflow-x-auto no-scrollbar">
+          <span className="font-sans text-[9px] font-bold tracking-[0.25em] text-[#B08A3E] uppercase shrink-0 hidden md:inline-block">
+            {lang === "th" ? "หมวดความเชี่ยวชาญ" : "Disciplines"} :
+          </span>
+
+          <div className="flex items-center gap-2 overflow-x-auto pb-1 md:pb-0 w-full md:w-auto">
+            <button
+              onClick={() => setSelectedPillar("all")}
+              className={`px-3.5 py-1.5 font-sans text-[10px] font-bold tracking-wider uppercase border transition-all shrink-0 ${
+                selectedPillar === "all"
+                  ? "bg-[#B08A3E] text-[#111111] border-[#B08A3E] shadow-sm"
+                  : "bg-[#1A1A1A] text-[#AFAFA9] border-[#F5F2EA]/10 hover:text-[#F5F2EA] hover:border-[#F5F2EA]/30"
+              }`}
             >
-              <div className="space-y-4">
-                {/* Image Placeholder with category representation */}
-                <div className="w-full aspect-[4/3] bg-[#F5F2EA]/5 flex items-center justify-center p-4 relative overflow-hidden">
-                  <span className="font-serif-display text-lg italic text-[#F5F2EA]/20 z-10">
-                    {project.title}
-                  </span>
-                  
-                  {/* Subtle background lines */}
-                  <svg className="w-full h-full opacity-5 absolute inset-0" xmlns="http://www.w3.org/2000/svg">
-                    <line x1="0" y1="0" x2="100%" y2="100%" stroke="#1E2A44" strokeWidth="1" />
-                    <line x1="100%" y1="0" x2="0" y2="100%" stroke="#1E2A44" strokeWidth="1" />
-                  </svg>
+              {lang === "th" ? "ทั้งหมด (All Disciplines)" : "All Disciplines"}
+            </button>
+
+            {pillars.map((p) => {
+              const isSelected = selectedPillar === p.id;
+              return (
+                <button
+                  key={p.id}
+                  onClick={() => setSelectedPillar(p.id)}
+                  className={`px-3 py-1.5 font-sans text-[10px] font-bold tracking-wider uppercase border transition-all shrink-0 ${
+                    isSelected
+                      ? "bg-[#B08A3E] text-[#111111] border-[#B08A3E]"
+                      : "bg-[#1A1A1A] text-[#AFAFA9] border-[#F5F2EA]/10 hover:text-[#F5F2EA] hover:border-[#F5F2EA]/30"
+                  }`}
+                >
+                  {p.number}. {lang === "th" ? p.tagTh : p.tagEn}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* 4. Craft Expertise Pillars Showcase */}
+      <div className="max-w-7xl mx-auto px-6 py-16 space-y-24">
+        {filteredPillars.map((pillar) => (
+          <section
+            key={pillar.id}
+            id={pillar.id}
+            className="border border-[#F5F2EA]/10 bg-[#161616] transition-all hover:border-[#F5F2EA]/20 relative overflow-hidden"
+          >
+            {/* Top Accent Stripe with Number */}
+            <div className="flex items-center justify-between px-6 md:px-10 py-4 border-b border-[#F5F2EA]/10 bg-[#1A1A1A]">
+              <div className="flex items-center gap-3">
+                <span className="font-serif-display text-xl text-[#B08A3E] font-semibold">{pillar.number}</span>
+                <span className="h-3 w-[1px] bg-[#F5F2EA]/20"></span>
+                <span className="font-sans text-[10px] font-bold tracking-[0.3em] uppercase text-[#F5F2EA]/70">
+                  {lang === "th" ? pillar.tagTh : pillar.tagEn}
+                </span>
+              </div>
+              <span className="font-sans text-[9px] uppercase tracking-widest text-[#AFAFA9]/50">
+                {pillar.images.length} {lang === "th" ? "ชิ้นงานในอัลบั้ม" : "Gallery Works"}
+              </span>
+            </div>
+
+            <div className="p-6 md:p-10 space-y-10">
+              {/* Header & Description Block */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <div className="lg:col-span-7 space-y-4">
+                  <h2 className="font-serif-display text-2xl md:text-4xl text-[#F5F2EA] font-light leading-snug">
+                    {lang === "th" ? pillar.titleTh : pillar.titleEn}
+                  </h2>
+                  <p className="font-sans text-xs md:text-sm text-[#AFAFA9] leading-relaxed text-justify">
+                    {lang === "th" ? pillar.descTh : pillar.descEn}
+                  </p>
                 </div>
 
-                <div className="space-y-2">
-                  <div className="flex justify-between items-center text-[10px] tracking-wider uppercase font-bold">
-                    <span className="text-[#B08A3E]">
-                      {categories.find(c => c.id === project.category)?.labelEn}
+                <div className="lg:col-span-5 bg-[#121212] border border-[#F5F2EA]/10 p-6 space-y-5">
+                  <div className="space-y-2">
+                    <span className="font-sans text-[9px] font-bold tracking-widest text-[#B08A3E] uppercase block">
+                      {lang === "th" ? "วัสดุและเครื่องมือหลัก" : "Key Materials & Mediums"}
                     </span>
-                    <span className="text-[#AFAFA9]/50">{project.year}</span>
+                    <ul className="space-y-1 text-xs text-[#F5F2EA]/80 font-sans">
+                      {(lang === "th" ? pillar.materialsTh : pillar.materialsEn).map((m, idx) => (
+                        <li key={idx} className="flex items-center gap-2">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#B08A3E]/60"></span>
+                          <span>{m}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <h3 className="font-serif-display text-2xl text-[#F5F2EA] leading-snug">
-                    {lang === "th" ? project.titleTh : project.title}
-                  </h3>
+
+                  <div className="pt-4 border-t border-[#F5F2EA]/10 space-y-2">
+                    <span className="font-sans text-[9px] font-bold tracking-widest text-[#B08A3E] uppercase block">
+                      {lang === "th" ? "จุดเด่นและเอกลักษณ์" : "Craft Signatures"}
+                    </span>
+                    <ul className="space-y-1 text-xs text-[#AFAFA9] font-sans">
+                      {(lang === "th" ? pillar.featuresTh : pillar.featuresEn).map((f, idx) => (
+                        <li key={idx} className="flex items-start gap-2">
+                          <span className="text-[#B08A3E] text-[10px] mt-0.5">✦</span>
+                          <span>{f}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-[#F5F2EA]/5">
-                <span className="font-sans text-[8px] text-[#AFAFA9]/50 uppercase block">Material</span>
-                <span className="font-sans text-xs text-[#AFAFA9]">{project.material}</span>
+              {/* Gallery Grid for this Pillar */}
+              <div className="space-y-4 pt-4 border-t border-[#F5F2EA]/5">
+                <div className="flex items-center justify-between">
+                  <span className="font-sans text-[9px] font-bold tracking-[0.25em] text-[#AFAFA9] uppercase">
+                    {lang === "th" ? "ผลงานตัวอย่างในพอร์ตโฟลิโอ" : "Portfolio Masterpieces"}
+                  </span>
+                  <span className="font-sans text-[9px] text-[#B08A3E]/70 italic">
+                    {lang === "th" ? "คลิกที่ภาพเพื่อดูรายละเอียดขนาดใหญ่" : "Click image to expand"}
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+                  {pillar.images.map((img, imgIdx) => (
+                    <div
+                      key={imgIdx}
+                      onClick={() =>
+                        openLightbox(
+                          lang === "th" ? pillar.titleTh : pillar.titleEn,
+                          pillar.images,
+                          imgIdx
+                        )
+                      }
+                      className="group cursor-pointer relative aspect-square bg-[#101010] border border-[#F5F2EA]/10 overflow-hidden transition-all hover:border-[#B08A3E] hover:shadow-lg"
+                    >
+                      <img
+                        src={img.src}
+                        alt={img.alt}
+                        loading="lazy"
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-90 group-hover:opacity-100"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-2 flex flex-col justify-end">
+                        <span className="font-sans text-[8px] text-[#F5F2EA] font-semibold line-clamp-2">
+                          {lang === "th" ? img.captionTh : img.captionEn}
+                        </span>
+                        <span className="text-[#B08A3E] text-[8px] uppercase tracking-wider mt-1">
+                          Zoom 🔍
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
-          ))}
+          </section>
+        ))}
+      </div>
+
+      {/* 5. Call To Action & Masterclass Banner */}
+      <div className="max-w-7xl mx-auto px-6 pt-12">
+        <div className="border border-[#B08A3E]/30 bg-[#161616] p-8 md:p-14 text-center relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-[#B08A3E]/5 rounded-full blur-2xl"></div>
+          <div className="max-w-3xl mx-auto space-y-6 relative z-10">
+            <span className="font-sans text-[10px] font-bold tracking-[0.4em] uppercase text-[#B08A3E]">
+              Masterclasses & Bespoke Commissions
+            </span>
+            <h2 className="font-serif-display text-3xl md:text-5xl text-[#F5F2EA] font-light">
+              {lang === "th"
+                ? "ต่อยอดองค์ความรู้ และร่วมสร้างสรรค์ชิ้นงานเฉพาะบุคคล"
+                : "Learn the Ancient Crafts or Commission a Bespoke Creation"}
+            </h2>
+            <p className="font-sans text-xs md:text-sm text-[#AFAFA9] leading-relaxed">
+              {lang === "th"
+                ? "เราเปิดสอนเวิร์กชอปถ่ายทอดทักษะงานหัตถกรรม 6 แขนงสู่ชุมชน และรับผลิตชิ้นงานเครื่องประดับ งานตกแต่ง และประติมากรรมสั่งทำพิเศษ (Bespoke Salon)"
+                : "We organize masterclasses transferring traditional artisan crafts to communities, and offer custom bespoke jewelry, home adornments, and spatial architectural commissions."}
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
+              <Link
+                to={`/${lang}/learning`}
+                className="px-6 py-3 bg-[#B08A3E] text-[#111111] font-sans text-xs font-bold uppercase tracking-widest hover:bg-[#c49c48] transition-calm"
+              >
+                {lang === "th" ? "ดูตารางเวิร์กชอป & กิจกรรม" : "View Masterclasses"}
+              </Link>
+              <Link
+                to={`/${lang}/contact`}
+                className="px-6 py-3 border border-[#F5F2EA]/20 text-[#F5F2EA] font-sans text-xs font-bold uppercase tracking-widest hover:border-[#F5F2EA]/60 hover:bg-[#1A1A1A] transition-calm"
+              >
+                {lang === "th" ? "ปรึกษางานสั่งทำพิเศษ (Bespoke)" : "Inquire Bespoke Project"}
+              </Link>
+            </div>
+          </div>
         </div>
-      ) : (
-        <div className="border border-dashed border-[#F5F2EA]/20 p-16 text-center bg-[#1A1A1A]">
-          <p className="font-serif text-sm text-[#AFAFA9]">
-            ไม่พบงานแสดงที่ตรงตามหมวดหมู่นี้
-          </p>
+      </div>
+
+      {/* 6. Lightbox Modal */}
+      {activeLightbox && (
+        <div
+          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-4 md:p-8 animate-fadeIn"
+          onClick={() => setActiveLightbox(null)}
+        >
+          <div
+            className="relative max-w-4xl w-full max-h-[90vh] bg-[#161616] border border-[#F5F2EA]/20 p-4 md:p-6 flex flex-col justify-between space-y-4"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Header */}
+            <div className="flex items-center justify-between border-b border-[#F5F2EA]/10 pb-3">
+              <div>
+                <span className="font-sans text-[9px] uppercase tracking-widest text-[#B08A3E]">
+                  {activeLightbox.pillarTitle}
+                </span>
+                <p className="font-serif-display text-sm md:text-base text-[#F5F2EA]">
+                  {lang === "th"
+                    ? activeLightbox.images[activeLightbox.currentIndex]?.captionTh
+                    : activeLightbox.images[activeLightbox.currentIndex]?.captionEn}
+                </p>
+              </div>
+              <button
+                onClick={() => setActiveLightbox(null)}
+                className="text-[#AFAFA9] hover:text-[#F5F2EA] text-2xl font-light px-2"
+                aria-label="Close modal"
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Main Image in Lightbox */}
+            <div className="relative aspect-[4/3] md:aspect-[16/10] w-full bg-black/50 overflow-hidden flex items-center justify-center">
+              <img
+                src={activeLightbox.images[activeLightbox.currentIndex]?.src}
+                alt={activeLightbox.images[activeLightbox.currentIndex]?.alt}
+                className="w-full h-full object-contain"
+              />
+
+              {/* Prev / Next Controls */}
+              {activeLightbox.images.length > 1 && (
+                <>
+                  <button
+                    onClick={prevLightboxImage}
+                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-[#B08A3E] text-white hover:text-black w-10 h-10 rounded-full flex items-center justify-center transition-calm"
+                    aria-label="Previous image"
+                  >
+                    ‹
+                  </button>
+                  <button
+                    onClick={nextLightboxImage}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-[#B08A3E] text-white hover:text-black w-10 h-10 rounded-full flex items-center justify-center transition-calm"
+                    aria-label="Next image"
+                  >
+                    ›
+                  </button>
+                </>
+              )}
+            </div>
+
+            {/* Modal Footer / Thumbnails */}
+            <div className="flex items-center justify-between pt-2 border-t border-[#F5F2EA]/10">
+              <span className="font-sans text-[10px] text-[#AFAFA9]">
+                {activeLightbox.currentIndex + 1} / {activeLightbox.images.length}
+              </span>
+
+              <div className="flex gap-2 overflow-x-auto max-w-[60%]">
+                {activeLightbox.images.map((thumb, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() =>
+                      setActiveLightbox({ ...activeLightbox, currentIndex: idx })
+                    }
+                    className={`w-10 h-10 shrink-0 border overflow-hidden transition-all ${
+                      idx === activeLightbox.currentIndex
+                        ? "border-[#B08A3E] opacity-100 scale-105"
+                        : "border-[#F5F2EA]/20 opacity-50 hover:opacity-100"
+                    }`}
+                  >
+                    <img
+                      src={thumb.src}
+                      alt={thumb.alt}
+                      className="w-full h-full object-cover"
+                    />
+                  </button>
+                ))}
+              </div>
+
+              <button
+                onClick={() => setActiveLightbox(null)}
+                className="px-4 py-1.5 font-sans text-[10px] uppercase tracking-wider bg-[#1A1A1A] hover:bg-[#222222] border border-[#F5F2EA]/20 text-[#F5F2EA]"
+              >
+                {lang === "th" ? "ปิด" : "Close"}
+              </button>
+            </div>
+          </div>
         </div>
       )}
-    </div>
     </div>
   );
 }
